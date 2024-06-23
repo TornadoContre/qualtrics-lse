@@ -1,11 +1,15 @@
 Qualtrics.SurveyEngine.addOnload(function () {
 	/*Place your JavaScript here to run when the page loads*/
+	function percentageVariation(value) {
+		let variation = Math.random();
+		console.log(variation);
+		return Math.floor((1 + variation) * value);
+	}
 	// Setting variables
 	let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
 	let aspectMap = JSON.parse(aspectMapString);
 	let uniquePairsString = Qualtrics.SurveyEngine.getEmbeddedData("uniquePairsString");
 	let uniquePairs = JSON.parse(uniquePairsString);
-	console.log(uniquePairs);
 
 	let pairCase = ["A", "B"];
 	const pairNameSuffix = "_pairName_";
@@ -15,7 +19,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 		pair.map((element, j) => {
 			Qualtrics.SurveyEngine.setEmbeddedData(i + pairNameSuffix + pairCase[j], aspectMap[element].name)
 			Qualtrics.SurveyEngine.setEmbeddedData(i + pairValueSuffix + pairCase[j], aspectMap[element].responseValue)
-			const newValue = parseInt(aspectMap[element].responseValue) + 30;
+			const newValue = percentageVariation(parseInt(aspectMap[element].responseValue));
 			Qualtrics.SurveyEngine.setEmbeddedData(i + pairNewValueSuffix + pairCase[j], newValue)
 		})
 	})

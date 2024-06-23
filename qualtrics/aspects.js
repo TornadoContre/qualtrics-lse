@@ -45,8 +45,8 @@ Qualtrics.SurveyEngine.addOnload(function () {
         { "name": "Physical Health", "span": "Salud Física", "markers": { "25%": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "50%": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "75%": "Lorem Ipsum is simply dummy text of the printing and typesetting industry." } },
         { "name": "Quality of the Environment", "span": "Calidad del ambiente", "markers": { "20%": "sth1", "40%": "sth2", "80%": "sth3" } },
         { "name": "Social", "span": "Social", "markers": { "25%": "sth25", "50%": "sth50", "75%": "sth75" } },
-        { "name": "Asp1", "span": "Asp1 Span", "markers": { "25%": "sth25", "50%": "sth50", "75%": "sth75" } },
-        { "name": "Asp2", "span": "Asp2 Span", "markers": { "25%": "sth25", "50%": "sth50", "75%": "sth75" } },
+        //{ "name": "Asp1", "span": "Asp1 Span", "markers": { "25%": "sth25", "50%": "sth50", "75%": "sth75" } },
+        //{ "name": "Asp2", "span": "Asp2 Span", "markers": { "25%": "sth25", "50%": "sth50", "75%": "sth75" } },
     ]
 
     var aspectMapString = JSON.stringify(aspectMap);
@@ -64,7 +64,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
     })
 
     // Let's pair things
-    let numberOfPairs = 5;
+    let numberOfPairs = 2;
     let uniquePairs = createUniquePairs(aspectMap, numberOfPairs);
     let uniquePairsString = JSON.stringify(uniquePairs);
     Qualtrics.SurveyEngine.setEmbeddedData("uniquePairsString", uniquePairsString);
