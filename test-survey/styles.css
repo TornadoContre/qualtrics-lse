@@ -1,24 +1,17 @@
 /*NOTAS: Para hacer hacer salto de línea usar estos caracteres especiales: &#013;&#010; */
 .tooltip {
     position: relative;
-    /* making the .tooltip span a container for the tooltip text */
-    border-bottom: 1px dashed #000;
-    /* little indicater to indicate it's hoverable */
     z-index: 1001;
+    border-bottom: 1px dashed #000;
 }
 
 .tooltip:before {
     content: attr(data-text);
-    /* here's the magic */
     position: absolute;
-    /* vertically center */
-    top: 50%;
+    top: 190%;
     transform: translateY(-50%);
-    /* move to right */
-    left: 100%;
-    margin-left: 15px;
-    /* and add a small left margin */
-    /* basic styles */
+    left: 50%;
+    margin-left: -100px;
     width: 200px;
     padding: 5px;
     border-radius: 5px;
@@ -27,20 +20,16 @@
     text-align: center;
     font-size: 16px;
     display: none;
-    /* hide by default */
     white-space: pre-line;
 }
 
-.tooltip:after {
+.tooltip::after {
     content: "";
     position: absolute;
-    /* position tooltip correctly */
-    left: 100%;
+    left: 50%;
     margin-left: -5px;
-    /* vertically center */
     top: 50%;
-    transform: translateY(-50%);
-    /* the arrow */
+    transform: rotate(90deg);
     border: 10px solid #000;
     border-color: transparent black transparent transparent;
     display: none;
@@ -48,6 +37,47 @@
 
 .tooltip:hover:before,
 .tooltip:hover:after {
+    display: block;
+}
+
+.matrix-tooltip {
+    position: relative;
+    border-bottom: 1px dashed #000;
+    z-index: 1001;
+}
+
+.matrix-tooltip:before {
+    content: attr(data-text);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 100%;
+    margin-left: 15px;
+    width: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    display: none;
+    white-space: pre-line;
+}
+
+.matrix-tooltip:after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    margin-left: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 10px solid #000;
+    border-color: transparent black transparent transparent;
+    display: none;
+}
+
+.matrix-tooltip:hover:before,
+.matrix-tooltip:hover:after {
     display: block;
 }
 
@@ -96,5 +126,94 @@
 }
 
 .marker:hover::before {
+    opacity: 1;
+}
+
+/* For the Trade Offs */
+:root {
+    --thumb-width: 0%;
+}
+
+.slider {
+    --gradient-start: 0%;
+    --gradient-end: 0%;
+    --color-1: #FF7F7F;
+    --color-2: red;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 92%;
+    height: 2em;
+    background: linear-gradient(to right, var(--color-1) 0% min(var(--gradient-start), var(--gradient-end)), var(--color-2) min(var(--gradient-start), var(--gradient-end)) max(var(--gradient-start), var(--gradient-end)), grey max(var(--gradient-start), var(--gradient-end)) 100%);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin: 00px 00px 00px 00px;
+}
+
+.sliderticks {
+    display: flex;
+    width: 92%;
+    justify-content: space-between;
+    margin: 00px 00px 00px 00px;
+}
+
+.sliderticks p {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 1px;
+    background: #D3D3D3;
+    height: 10px;
+    line-height: 40px;
+    margin: 0 0 20px 0;
+    font-size: 1.2vw;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: var(--thumb-width);
+    height: 2em;
+    background: #000000;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: var(--thumb-width);
+    height: 2em;
+    background: #000000;
+    cursor: pointer;
+}
+
+.slider::-ms-thumb {
+    width: var(--thumb-width);
+    height: 2em;
+    background: #000000;
+    cursor: pointer;
+}
+
+.mensaje {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.mensaje.show {
     opacity: 1;
 }
