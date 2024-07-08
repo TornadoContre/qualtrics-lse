@@ -1,84 +1,65 @@
 Qualtrics.SurveyEngine.addOnload(function () {
-    // Setting variables
-    let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
-    let aspectMap = JSON.parse(aspectMapString);
-    let questionId = this.questionId;
-    let $ = jQuery;
-    let choices = this.getQuestionInfo().Choices;
+	// Setting variables
+	let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
+	let aspectMap = JSON.parse(aspectMapString);
+	let questionId = this.questionId;
+	let $ = jQuery;
+	let choices = this.getQuestionInfo().Choices;
 
-    let regex = />([^<]+)</;
-    for (const choiceKey in choices) {
-		console.log(choiceKey);
+	let regex = />([^<]+)</;
+	for (const choiceKey in choices) {
 		// Extract text from the div block
-        const text = choices[choiceKey].Text
-        const matchedKey = text.match(regex);
+		const text = choices[choiceKey].Text;
+		const matchedKey = text.match(regex);
 		if (!matchedKey) {
 			// Choice without extra markers
 			continue;
 		}
-        
+
 		// Finds which element match
 		let aspectObj = aspectMap.find(element => element.name === matchedKey[1]);
-        const markers = aspectObj["markers"];
+		const markers = aspectObj["markers"];
 
-        // Tooltip in handler
+		// Tooltip in handler
 		let msg = "Hola, soy un mensaje que se mueve!";
-		let handleId = '#' + questionId + ' .' + questionId + '-' + choiceKey + '-handle';
-		let tooltipId = '#' + questionId + '-' + choiceKey + '-tooltip';
-		console.log(tooltipId);
-		let handle =  $(handleId);
-		handle.append('<div id=' + tooltipId + ' class="mensaje">' + msg + '</div>')
-		var tooltip = $(tooltipId);
-		console.log(tooltip);
-		
+		let tooltipId = questionId + '-' + choiceKey + '-tooltip';
+		let handle = $('#' + questionId + ' .' + questionId + '-' + choiceKey + '-handle');
+		handle.addClass("hover-trigger");
+		handle.append('<div id=' + tooltipId + ' class="mensaje">' + msg + '</div>');
+
 		// Applies the marker into slider
 		let row = '#' + questionId + ' .' + questionId + '-' + choiceKey + '-track';
-        let choiceRow = $(row);
+		let choiceRow = $(row);
 
-        for (var position in markers) {
-            // Crear un elemento de marcador
-            let title = markers[position];
-            var markerElement = $('<div title="' + title + '" class="marker" style="left: ' + position + '"></div>');
-            // Agregar el marcador a la opción
-            choiceRow.append(markerElement);
-        };
+		for (var position in markers) {
+			// Crear un elemento de marcador
+			let title = markers[position];
+			//var markerElement = $('<div title="' + title + '" class="marker" style="left: ' + position + '"></div>');
+			// Agregar el marcador a la opción
+			//choiceRow.append(markerElement);
+		};
 
-        // Capture the slider value
-        var slider = $('input[type=text].' + questionId + '-' + choiceKey + '-result');
-        var sliderValue = slider.val();
+		// Capture the slider value
+		var slider = $('input[type=text].' + questionId + '-' + choiceKey + '-result');
+		var sliderValue = slider.val();
 
-        slider.on('input change', function () {
-            sliderValue = $(this).val();
-            aspectObj["responseValue"] = sliderValue;
+		slider.on('input change', function () {
+			aspectObj["responseValue"] = $(this).val();
 			aspectMapString = JSON.stringify(aspectMap);
 			Qualtrics.SurveyEngine.setEmbeddedData('aspectMapString', aspectMapString);
-			
-			console.log(tooltip);
-			
-			// Shows the tooltip
-			setTimeout(() => {
-				tooltip.addClass("show");
-			}, 10); // Pequeño retraso para permitir la renderización
-
-			// Remove tooltip after some time
-			setTimeout(() => {
-				tooltip.removeClass('show');
-			}, 2000);
-        });
-    };
+		});
+	};
 
 });
 
 Qualtrics.SurveyEngine.addOnReady(function () {
-    /*Place your JavaScript here to run when the page is fully displayed*/
+	/*Place your JavaScript here to run when the page is fully displayed*/
 	// Setting variables
-    let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
-    let aspectMap = JSON.parse(aspectMapString);
-    let questionId = this.questionId;
-    let $ = jQuery;
-	
-	console.log("OnListo");
-	// TODO: Clean code and update logic
+	let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
+	let aspectMap = JSON.parse(aspectMapString);
+	let questionId = this.questionId;
+	let $ = jQuery;
+
 	// Mutation object settings
 	const callback = function (mutationsList, observer) {
 		for (const mutation of mutationsList) {
@@ -94,54 +75,54 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 					msg = "Let's go reach 100!!";
 				}
 				for (const children of target.children) {
-					// TODO: Just use useful divs
-					let handleId = children.id.replaceAll("~", "-");
-					let tooltipId = handleId.replaceAll("handle", "tooltip");
-					
-					let handle = $(" ." + handleId);
-					handle.append('<div id=' + tooltipId + ' class="mensaje">' + msg + '</div>')
-					
-					let tooltip = $('#'+tooltipId);
+					if (!children.id.includes('handle')) {
+						continue;
+					}
+					let tooltipId = children.id.replaceAll("~", "-").replaceAll("handle", "tooltip");
+					let tooltip = $('#' + tooltipId);
+
+
 					// Shows the tooltip
 					setTimeout(() => {
-						tooltip.addClass("show");
+						tooltip.text(msg);
+						//tooltip.addClass("show");
 					}, 10); // Pequeño retraso para permitir la renderización
 
+					/*
 					// Remove tooltip after some time
 					setTimeout(() => {
 						tooltip.removeClass('show');
-						tooltip.remove();
-					}, 2000);
+					}, 10000);
+					*/
 				}
-				
+
 			}
 		}
 	}
 	const config = { attributes: true };
 
-    // Important: the length of the aspect and the statements must be the same
-    let choices = this.getQuestionInfo().Choices;
+	// Important: the length of the aspect and the statements must be the same
+	let choices = this.getQuestionInfo().Choices;
 
-    let regex = />([^<]+)</;
-    for (const choiceKey in choices) {
+	let regex = />([^<]+)</;
+	for (const choiceKey in choices) {
 		// Extracts text from the div block
-        const text = choices[choiceKey].Text
-        const matchedKey = text.match(regex);
+		const text = choices[choiceKey].Text
+		const matchedKey = text.match(regex);
 		if (!matchedKey) {
 			// Choice without extra markers
 			continue;
 		}
-		
+
 		// Sets the observer
-		let row = '#' + questionId + ' .' + questionId + '-' + choiceKey + '-track';
-        let choiceRow = $(row);
+		let choiceRow = $('#' + questionId + ' .' + questionId + '-' + choiceKey + '-track');
 		let observer = new MutationObserver(callback);
-		//observer.observe(choiceRow[0], config);
+		observer.observe(choiceRow[0], config);
 	}
 
 });
 
 Qualtrics.SurveyEngine.addOnUnload(function () {
-    /*Place your JavaScript here to run when the page is unloaded*/
+	/*Place your JavaScript here to run when the page is unloaded*/
 
 });
