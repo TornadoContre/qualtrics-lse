@@ -59,21 +59,34 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 	let aspectMap = JSON.parse(aspectMapString);
 	let questionId = this.questionId;
 	let $ = jQuery;
+	let timerStarted = Array(aspectMap.length).fill(false);
 
 	// Mutation object settings
 	const callback = function (mutationsList, observer) {
 		for (const mutation of mutationsList) {
-			if (mutation.type === "attributes" & mutation.attributeName === "aria-valuenow") {
+			if (mutation.type === "attributes" && mutation.attributeName === "aria-valuenow") {
 				let target = mutation.target;
-				var msg = "A message. A long one? Maybe.";
-				const val = parseInt(target.ariaValueNow);
-				if (val > 25 & val < 50) {
-					msg = "You are between 25 and 50";
-				} else if (val >= 50 & val < 75) {
-					msg = "Big numbers eh?";
-				} else if (val >= 75) {
-					msg = "Let's go reach 100!!";
+				const value = parseInt(target.ariaValueNow);
+				if (value == 0) {
+					continue;
 				}
+
+				const aspectId = target.id.replace('track', 'text');
+				const aspectName = $("[id='" + aspectId + "']")[0].textContent.strip();
+				let aspectObj = aspectMap.find(element => element.name === aspectName);
+				const aspectIndex = aspectMap.indexOf(aspectObj);
+				if (aspectIndex === -1) { continue; }
+				const markers = aspectObj["markers"];
+				var msg = "";
+				for (const markerRange in markers) {
+					let lowerBound = markerRange.split('-').map(Number)[0]
+					let upperBound = markerRange.split('-').map(Number)[1];
+					if (lowerBound < value && value <= upperBound) {
+						msg = markers[markerRange];
+						break;
+					}
+				}
+
 				for (const children of target.children) {
 					if (!children.id.includes('handle')) {
 						continue;
@@ -81,21 +94,24 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 					let tooltipId = children.id.replaceAll("~", "-").replaceAll("handle", "tooltip");
 					let tooltip = $('#' + tooltipId);
 
-
-					// Shows the tooltip
+					// Updates the message value
 					setTimeout(() => {
 						tooltip.text(msg);
-						//tooltip.addClass("show");
-					}, 10); // Pequeño retraso para permitir la renderización
+					}, 10) // Little timer to allow renderization
 
-					/*
-					// Remove tooltip after some time
-					setTimeout(() => {
-						tooltip.removeClass('show');
-					}, 10000);
-					*/
+					if (!timerStarted[aspectIndex]) {
+						// Shows the tooltip
+						setTimeout(() => {
+							timerStarted[aspectIndex] = true;
+							tooltip.addClass("show");
+						}, 10);
+						// Remove tooltip after some time
+						setTimeout(() => {
+							timerStarted[aspectIndex] = false;
+							tooltip.removeClass('show');
+						}, 3000);
+					}
 				}
-
 			}
 		}
 	}

@@ -42,11 +42,11 @@ Qualtrics.SurveyEngine.addOnload(function () {
 
     /* Aspects definition */
     var aspectMap = [
-        { "name": "Physical Health", "span": "Salud Física", "markers": { "25%": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "50%": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "75%": "Lorem Ipsum is simply dummy text of the printing and typesetting industry." } },
-        { "name": "Quality of the Environment", "span": "Calidad del ambiente", "markers": { "20%": "sth1", "40%": "sth2", "80%": "sth3" } },
-        { "name": "Social", "span": "Social", "markers": { "25%": "sth25", "50%": "sth50", "75%": "sth75" } },
-        //{ "name": "Asp1", "span": "Asp1 Span", "markers": { "25%": "sth25", "50%": "sth50", "75%": "sth75" } },
-        //{ "name": "Asp2", "span": "Asp2 Span", "markers": { "25%": "sth25", "50%": "sth50", "75%": "sth75" } },
+        { "name": "Physical Health", "span": "Salud Física", "markers": { "0-25": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "25-50": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", "50-75": "Lorem Ipsum is simply dummy text of the printing and typesetting industry." , "75-100": "sth100 sth100."} },
+        { "name": "Quality of the Environment", "span": "Calidad del ambiente", "markers": { "0-20": "sth1", "20-40": "sth2", "40-80": "sth3" , "80-100": "sth4"} },
+        { "name": "Social", "span": "Social", "markers": { "0-25": "sth25", "25-50": "sth50", "50-75": "sth75" , "75-100": "sth100 sth100."} },
+        { "name": "Asp1", "span": "Asp1 Span", "markers": { "0-25": "sth25", "25-50": "sth50", "50-75": "sth75" , "75-100": "sth100 sth100."} },
+        { "name": "Asp2", "span": "Asp2 Span", "markers": { "0-25": "sth25", "25-50": "sth50", "50-75": "sth75" , "75-100": "sth100 sth100."} },
     ]
 
     var aspectMapString = JSON.stringify(aspectMap);
