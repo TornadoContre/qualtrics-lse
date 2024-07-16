@@ -41,6 +41,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 			Qualtrics.SurveyEngine.setEmbeddedData('aspectMapString', aspectMapString);
 		});
 	};
+	$(".QuestionBody.BorderColor").css('overflow', 'visible');
 
 });
 
