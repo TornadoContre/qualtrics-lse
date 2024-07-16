@@ -19,29 +19,21 @@ Qualtrics.SurveyEngine.addOnload(function () {
 		// Finds which element match
 		let aspectObj = aspectMap.find(element => element.name === matchedKey[1]);
 		const markers = aspectObj["markers"];
-
+		const keyStartsWith0 = Object.keys(markers).find(key => key.startsWith("0"));
+		
+		let track = $('#' + questionId + ' .' + questionId + '-' + choiceKey + '-track');
+		track.css('z-index', 1002);
+		track.css('opacity', 1);
+		
 		// Tooltip in handler
-		let msg = "Hola, soy un mensaje que se mueve!";
+		let msg = markers[keyStartsWith0];
 		let tooltipId = questionId + '-' + choiceKey + '-tooltip';
 		let handle = $('#' + questionId + ' .' + questionId + '-' + choiceKey + '-handle');
 		handle.addClass("hover-trigger");
 		handle.append('<div id=' + tooltipId + ' class="mensaje">' + msg + '</div>');
 
-		// Applies the marker into slider
-		let row = '#' + questionId + ' .' + questionId + '-' + choiceKey + '-track';
-		let choiceRow = $(row);
-
-		for (var position in markers) {
-			// Crear un elemento de marcador
-			let title = markers[position];
-			//var markerElement = $('<div title="' + title + '" class="marker" style="left: ' + position + '"></div>');
-			// Agregar el marcador a la opción
-			//choiceRow.append(markerElement);
-		};
-
 		// Capture the slider value
 		var slider = $('input[type=text].' + questionId + '-' + choiceKey + '-result');
-		var sliderValue = slider.val();
 
 		slider.on('input change', function () {
 			aspectObj["responseValue"] = $(this).val();
@@ -67,9 +59,6 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 			if (mutation.type === "attributes" && mutation.attributeName === "aria-valuenow") {
 				let target = mutation.target;
 				const value = parseInt(target.ariaValueNow);
-				if (value == 0) {
-					continue;
-				}
 
 				const aspectId = target.id.replace('track', 'text');
 				const aspectName = $("[id='" + aspectId + "']")[0].textContent.strip();
@@ -81,16 +70,21 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 				for (const markerRange in markers) {
 					let lowerBound = markerRange.split('-').map(Number)[0]
 					let upperBound = markerRange.split('-').map(Number)[1];
-					if (lowerBound < value && value <= upperBound) {
+					//let upperCondition = upperBound === 100 ? value <= upperBound : value < upperBound;
+					let upperCondition = value <= upperBound;
+					if (lowerBound < value && upperCondition) {
 						msg = markers[markerRange];
 						break;
 					}
 				}
 
+				if (value === 0) {continue; }
+
 				for (const children of target.children) {
 					if (!children.id.includes('handle')) {
 						continue;
 					}
+					
 					let tooltipId = children.id.replaceAll("~", "-").replaceAll("handle", "tooltip");
 					let tooltip = $('#' + tooltipId);
 
