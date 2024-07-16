@@ -43,7 +43,6 @@
 .matrix-tooltip {
     position: relative;
     border-bottom: 1px dashed #000;
-    z-index: 1001;
 }
 
 .matrix-tooltip:before {
@@ -79,6 +78,7 @@
 .matrix-tooltip:hover:before,
 .matrix-tooltip:hover:after {
     display: block;
+    z-index: 1003;
 }
 
 /* CSS para hacer aparecer los markers en las barras*/
@@ -145,7 +145,8 @@
     height: 2em;
     background: linear-gradient(to right, var(--color-1) 0% min(var(--gradient-start), var(--gradient-end)), var(--color-2) min(var(--gradient-start), var(--gradient-end)) max(var(--gradient-start), var(--gradient-end)), grey max(var(--gradient-start), var(--gradient-end)) 100%);
     outline: none;
-    opacity: 0.7;
+    opacity: 1;
+    pointer-events: none;
     -webkit-transition: .2s;
     transition: opacity .2s;
     margin: 00px 00px 00px 00px;
@@ -171,10 +172,6 @@
     font-size: 1.2vw;
 }
 
-.slider:hover {
-    opacity: 1;
-}
-
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -189,6 +186,7 @@
     height: 2em;
     background: #000000;
     cursor: pointer;
+    opacity: 0;
 }
 
 .slider::-ms-thumb {
@@ -200,15 +198,18 @@
 
 .mensaje {
     position: absolute;
-    top: -40px;
+    bottom: 130%;
+    /*top: -40px;
     left: 50%;
-    transform: translateX(-50%);
+    white-space: nowrap;
+    */
+    transform: translateX(-47%);
     background-color: black;
     color: white;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 14px;
-    white-space: nowrap;
+    width: 190px;
     opacity: 0;
     transition: opacity 0.3s;
     pointer-events: none;
@@ -216,7 +217,7 @@
 }
 
 .mensaje.show,
-.hover-trigger:hover > .mensaje {
+.hover-trigger:hover>.mensaje {
     display: block;
     opacity: 1;
 }
