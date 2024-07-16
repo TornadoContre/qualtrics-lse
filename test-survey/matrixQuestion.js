@@ -59,7 +59,7 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 		for (const mutation of mutationsList) {
 			if (mutation.type === "attributes" && mutation.attributeName === "aria-valuenow") {
 				let target = mutation.target;
-				const value = parseInt(target.ariaValueNow);
+				const value = parseInt(target.getAttribute("aria-valuenow"));
 
 				const aspectId = target.id.replace('track', 'text');
 				const aspectName = $("[id='" + aspectId + "']")[0].textContent.strip();
