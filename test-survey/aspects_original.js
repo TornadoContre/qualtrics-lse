@@ -47,8 +47,6 @@ Qualtrics.SurveyEngine.addOnload(function () {
         { "name": "Social", "span": "Social", "markers": { "0-25": "sth25", "25-50": "sth50", "50-75": "sth75" , "75-100": "sth100 sth100."} },
         { "name": "Asp1", "span": "Asp1 Span", "markers": { "0-25": "sth25", "25-50": "sth50", "50-75": "sth75" , "75-100": "sth100 sth100."} },
         { "name": "Asp2", "span": "Asp2 Span", "markers": { "0-25": "sth25", "25-50": "sth50", "50-75": "sth75" , "75-100": "sth100 sth100."} },
-        { "name": "Other (please specify)"},
-        { "name": "Other (please specify)"},
     ]
 
     var aspectMapString = JSON.stringify(aspectMap);

@@ -8,7 +8,15 @@ Qualtrics.SurveyEngine.addOnload(function()
     /* To allow use full width of the option */
 	let choices = this.getQuestionInfo().Choices;
 	for (const choiceKey in choices) {
-		$("#"+this.questionId + "-" + choiceKey + "-label" + " span").css({"width":"100%"});
+        let elementId = "#"+ questionId + "-" + choiceKey + "-label";
+		$(elementId + " span").css({"width":"100%"});
+        
+        let tooltipObj = $(elementId + " span.tooltip")[0];
+        let tooltipText = tooltipObj.getAttribute("data-text");
+        if (tooltipText === "") {
+            tooltipObj.removeAttribute("data-text");
+            tooltipObj.removeClassName("tooltip");
+        }
 	}
 
 });
