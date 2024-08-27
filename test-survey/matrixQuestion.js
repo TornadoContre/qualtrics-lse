@@ -5,8 +5,9 @@ Qualtrics.SurveyEngine.addOnload(function () {
 	}
 	
 	// Setting variables
-	let personalResponse = true // true if is a 'personal' question. false for political/societary question
-	let responseKey = personalResponse ? 'personalResponseValue' : 'socialResponseValue';
+	let personalQuestion = true // true if is a 'personal' question. false for political/societary question
+	let nameKey = personalQuestion ? 'personalName' : 'socialName'
+	let responseKey = personalQuestion ? 'personalResponseValue' : 'socialResponseValue';
 	let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
 	let aspectMap = JSON.parse(aspectMapString);
 	let questionId = this.questionId;
@@ -60,9 +61,12 @@ Qualtrics.SurveyEngine.addOnload(function () {
 		var inputText = $('input[type=text].QR-' + questionId + '-' + choiceKey + '-TEXT');
 		if(inputText.length > 0){
 			inputText.on('input change', function () {
-				aspectObj["name"] = $(this).val();
+				aspectObj[nameKey] = $(this).val();
 				updateAspectMap(aspectMap);
 			});
+		} else {
+			aspectObj[nameKey] = aspectObj["name"];
+			updateAspectMap(aspectMap);
 		}
 	};
 	$(".QuestionBody.BorderColor").css('overflow', 'visible');
