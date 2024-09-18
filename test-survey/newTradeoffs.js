@@ -1,6 +1,8 @@
 Qualtrics.SurveyEngine.addOnload(function()
 {
 	/*Place your JavaScript here to run when the page loads*/
+	// Setting variables
+	let pairNumber = 1;
 	let questionId = this.questionId;
 	let $ = jQuery;
 	
@@ -12,8 +14,16 @@ Qualtrics.SurveyEngine.addOnload(function()
     
 	// Disable Input Text
     let firstInputText = $("#" + questionId + " ." + questionId + "-" + firstChoiceKey + "-result");
-    firstInputText.prop("disabled",true)
-    firstInputText.css("opacity", "1")
+    //firstInputText.prop("disabled",true)
+    //firstInputText.css("opacity", "1")
+
+	// Custom start
+	let aValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_pairValue_A")) / 2;
+	let bValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_pairValue_B"))
+	console.log(aValue);
+	console.log(bValue);
+	this.setChoiceValue(firstChoiceKey, aValue);
+	this.setChoiceValue(2, bValue);
 });
 
 Qualtrics.SurveyEngine.addOnReady(function()

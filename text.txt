@@ -1,0 +1,17 @@
+[ [ 0, 1 ], [ 0, 2 ], [ 1, 2 ], [ 1, 3 ], [ 0, 3 ] ]
+#####
+Physical Health | Indice: 0
+Quality of the Environment | Indice: 1
+#####
+Physical Health | Indice: 0
+Social | Indice: 1
+#####
+Quality of the Environment | Indice: 0
+Social | Indice: 1
+#####
+Quality of the Environment | Indice: 0
+Asp1 | Indice: 1
+#####
+Physical Health | Indice: 0
+Asp1 | Indice: 1
+1

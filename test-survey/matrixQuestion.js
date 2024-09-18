@@ -57,8 +57,9 @@ Qualtrics.SurveyEngine.addOnload(function () {
 			updateAspectMap(aspectMap);
 		});
 		
-		// 2.2 Capture the slider value
+		// 2.2 Capture the input value
 		var inputText = $('input[type=text].QR-' + questionId + '-' + choiceKey + '-TEXT');
+		aspectObj[nameKey] = '';
 		if(inputText.length > 0){
 			inputText.on('input change', function () {
 				aspectObj[nameKey] = $(this).val();
