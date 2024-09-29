@@ -76,7 +76,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 	//let uniquePairs = JSON.parse(uniquePairsString);
 
 	// Remove empty aspects
-	aspectMap = aspectMap.filter((aspect) => aspect[nameKey] !== '');
+	aspectMap = aspectMap.filter((aspect) => aspect[nameKey] ? aspect[nameKey] !== '' : false);
 
 	const increaseArrow = '&#8680&nbsp';
 	const decreaseArrow = '&#8678&nbsp';
