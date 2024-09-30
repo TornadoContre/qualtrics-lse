@@ -33,9 +33,22 @@ Qualtrics.SurveyEngine.addOnload(function()
 		msjElement.css({
 			"text-align": "center",
 			"width": "fit-content",
-			"left": leftPosition + "%"
+			"left": Math.min(Math.max(11, leftPosition), 90) + "%"
 		})
+		let arrowId = questionId + "~ARR~" + idNumber;
+		let arrow = leftPosition < 10 ? "<p>&#8592</p>" : "<p>&#8592 &#8592 &#8592</p>";
+		let arrowElement = $("<div></div>").attr("id", arrowId).addClass("mensaje").addClass("show").append(arrow);
+		arrowElement.css({
+			"text-align": "center",
+			"width": "fit-content",
+			"left": Math.min(Math.max(6, leftPosition), 85) + "%",
+			"bottom": "-150%",
+			"background": "transparent",
+			"color": "black",
+			"font-size": "25px"
+		});
 		track.append(msjElement)
+		track.append(arrowElement)
 	}
 	const trackWidth = firstTrack.width() - firstHandle.outerWidth()
 	let middlePoint = (aValue - halvedValue) / 2;
