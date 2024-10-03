@@ -18,8 +18,10 @@ Qualtrics.SurveyEngine.addOnload(function()
 	// Disable Track, remove Handle and add slider format
     let firstTrack = $("#" + questionId + " ." + questionId + "-" + firstChoiceKey + "-track");
 	let firstHandle = $("#" + questionId + " ." + questionId + "-" + firstChoiceKey + "-handle");
+	let firstInput = $("#" + questionId + " ." + questionId + "-" + firstChoiceKey + "-result");
 	firstTrack.css({"pointer-events": "none", "height": "25px"})
 	firstHandle.css("display", "none");
+	firstInput.css("display", "none");
 	firstTrack.addClass("slider");
 	firstTrack[0].style.setProperty("--gradient-start", halvedValue + "%")
 	firstTrack[0].style.setProperty("--gradient-end", aValue + "%")
