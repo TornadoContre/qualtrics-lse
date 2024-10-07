@@ -5,8 +5,8 @@ Qualtrics.SurveyEngine.addOnload(function () {
 	}
 	
 	// Setting variables
-	let personalQuestion = true // true if is a 'personal' question. false for political/societary question
-	let nameKey = personalQuestion ? 'personalName' : 'socialName'
+	let personalQuestion = false; // true if is a 'personal' question. false for political/societary question
+	let nameKey = personalQuestion ? 'personalName' : 'socialName';
 	let responseKey = personalQuestion ? 'personalResponseValue' : 'socialResponseValue';
 	let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
 	let aspectMap = JSON.parse(aspectMapString);

@@ -6,9 +6,9 @@ Qualtrics.SurveyEngine.addOnload(function () {
 
     function factorial(n) {
         if (n == 0 || n == 1) {
-            return 1
+            return 1;
         } else {
-            return n * factorial(n - 1)
+            return n * factorial(n - 1);
         }
     }
 
@@ -63,12 +63,12 @@ Qualtrics.SurveyEngine.addOnload(function () {
 		var newValue = value + magnitude * sign;
 		newValue = Math.min(100, newValue);
 		newValue = Math.max(0, newValue);
-		return newValue
+		return newValue;
 	}
 
 	// Setting variables
-	let personalQuestion = true // true if is a 'personal' question. false for political/societary question
-	let nameKey = personalQuestion ? 'personalName' : 'socialName'
+	let personalQuestion = true; // true if is a 'personal' question. false for political/societary question
+	let nameKey = personalQuestion ? 'personalName' : 'socialName';
 	let responseKey = personalQuestion ? 'personalResponseValue' : 'socialResponseValue';
 	let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
 	let aspectMap = JSON.parse(aspectMapString);
