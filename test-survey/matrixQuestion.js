@@ -30,9 +30,10 @@ Qualtrics.SurveyEngine.addOnload(function () {
 		track.css('opacity', 1);
 		
 		// Find aspect object
-		let aspectObj = aspectMap.find(element => element.name === matchedKey[1] && (element.choiceId === undefined || element.choiceId === choiceKey));
+		let elementChoiceId = nameKey + "-choiceId-" + choiceKey; // Useful for the 'other' aspect
+		let aspectObj = aspectMap.find(element => element.name === matchedKey[1] && (element[elementChoiceId] === undefined || element[elementChoiceId] === choiceKey));
 		if (!aspectObj) {continue;}
-		aspectObj["choiceId"] = choiceKey;
+		aspectObj[elementChoiceId] = choiceKey;
 		updateAspectMap(aspectMap);
 		
 		// 1. Set markers
