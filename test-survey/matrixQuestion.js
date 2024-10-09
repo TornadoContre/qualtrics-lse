@@ -5,7 +5,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 	}
 	
 	// Setting variables
-	let personalQuestion = false; // true if is a 'personal' question. false for political/societary question
+	let personalQuestion = true; // true if is a 'personal' question. false for political/societary question
 	let nameKey = personalQuestion ? 'personalName' : 'socialName';
 	let responseKey = personalQuestion ? 'personalResponseValue' : 'socialResponseValue';
 	let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
@@ -30,8 +30,8 @@ Qualtrics.SurveyEngine.addOnload(function () {
 		track.css('opacity', 1);
 		
 		// Find aspect object
-		let elementChoiceId = nameKey + "-choiceId-" + choiceKey; // Useful for the 'other' aspect
-		let aspectObj = aspectMap.find(element => element.name === matchedKey[1] && (element[elementChoiceId] === undefined || element[elementChoiceId] === choiceKey));
+		let elementChoiceId = nameKey + "-choiceId"; // Useful for the 'other' aspect
+		let aspectObj = aspectMap.find(element => element.name === matchedKey[1] && (!Object.hasOwn(element, elementChoiceId) || element[elementChoiceId] === choiceKey));
 		if (!aspectObj) {continue;}
 		aspectObj[elementChoiceId] = choiceKey;
 		updateAspectMap(aspectMap);
@@ -148,7 +148,7 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 	let regex = />([^<]+)</;
 	for (const choiceKey in choices) {
 		// Extracts text from the div block
-		const text = choices[choiceKey].Text
+		const text = choices[choiceKey].Text;
 		const matchedKey = text.match(regex);
 		if (!matchedKey) {
 			// Choice without extra markers
