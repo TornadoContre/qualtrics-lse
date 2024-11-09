@@ -61,15 +61,17 @@ Qualtrics.SurveyEngine.addOnload(function()
 	// Set second Track style
 	let secondTrack = $("#" + questionId + " ." + questionId + "-" + secondChoiceKey + "-track");
 	let handleTrack = $("#" + questionId + " ." + questionId + "-" + secondChoiceKey + "-handle");
-	handleTrack.css("margin-top", "3px")
+	handleTrack.css("margin-top", "3px");
 	secondTrack.css({
 		"height": "10px",
 		"background": "linear-gradient(to right, gray 0% min(var(--gradient-start), var(--gradient-end)), var(--color-1) min(var(--gradient-start), var(--gradient-end)) max(var(--gradient-start), var(--gradient-end)), var(--color-2) max(var(--gradient-start), var(--gradient-end)) 100%)"
-	})
-	secondTrack[0].style.setProperty("--gradient-start", bValue + "%")
-	secondTrack[0].style.setProperty("--gradient-end", bValue + "%")
-	secondTrack[0].style.setProperty("--color-1", "blue")
-	secondTrack[0].style.setProperty("--color-2", "#ADD8E6")
+	});
+	secondTrack[0].style.setProperty("--gradient-start", bValue + "%");
+	secondTrack[0].style.setProperty("--gradient-end", bValue + "%");
+	secondTrack[0].style.setProperty("--color-1", "blue");
+	secondTrack[0].style.setProperty("--color-2", "#ADD8E6");
+
+	$(".QuestionBody.BorderColor").css('overflow', 'visible');
 });
 
 Qualtrics.SurveyEngine.addOnReady(function()
@@ -111,5 +113,12 @@ Qualtrics.SurveyEngine.addOnReady(function()
 Qualtrics.SurveyEngine.addOnUnload(function()
 {
 	/*Place your JavaScript here to run when the page is unloaded*/
+
+	 let tooltipObj = $(elementId + " span.tooltip")[0];
+        let tooltipText = tooltipObj.getAttribute("data-text");
+        if (tooltipText === "") {
+            tooltipObj.removeAttribute("data-text");
+            tooltipObj.removeClassName("tooltip");
+        }
 
 });
