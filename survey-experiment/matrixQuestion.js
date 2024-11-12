@@ -3,7 +3,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 		aspectMapString = JSON.stringify(newAspectMap);
 		Qualtrics.SurveyEngine.setEmbeddedData('aspectMapString', aspectMapString);
 	}
-	
+
 	// Setting variables
 	let personalQuestion = true; // true if is a 'personal' question. false for political/societary question
 	let nameKey = personalQuestion ? 'personalName' : 'socialName';
@@ -29,19 +29,19 @@ Qualtrics.SurveyEngine.addOnload(function () {
 		let track = $('#' + questionId + ' .' + questionId + '-' + choiceKey + '-track');
 		track.css('z-index', 1002);
 		track.css('opacity', 1);
-		
+
 		// Find aspect object
 		let elementChoiceId = nameKey + "-choiceId"; // Useful for the 'other' aspect
 		let aspectObj = aspectMap.find(element => element.name === matchedKey[1] && (!Object.hasOwn(element, elementChoiceId) || element[elementChoiceId] === choiceKey));
-		if (!aspectObj) {continue;}
+		if (!aspectObj) { continue; }
 		aspectObj[elementChoiceId] = choiceKey;
 		updateAspectMap(aspectMap);
-		
+
 		// 1. Set markers
 		const markers = aspectObj.markers;
 		if (markers) {
 			const keyStartsWith0 = Object.keys(markers).find(key => key.startsWith("0"));
-			
+
 			// Tooltip in handler
 			let msg = markers[keyStartsWith0];
 			let tooltipId = questionId + '-' + choiceKey + '-tooltip';
@@ -58,11 +58,11 @@ Qualtrics.SurveyEngine.addOnload(function () {
 			aspectObj[responseKey] = $(this).val();
 			updateAspectMap(aspectMap);
 		});
-		
+
 		// 2.2 Capture the input value
 		var inputText = $('input[type=text].QR-' + questionId + '-' + choiceKey + '-TEXT');
 		aspectObj[nameKey] = '';
-		if(inputText.length > 0){
+		if (inputText.length > 0) {
 			inputText.on('input change', function () {
 				aspectObj[nameKey] = $(this).val();
 				updateAspectMap(aspectMap);
@@ -111,13 +111,13 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 					}
 				}
 
-				if (value === 0) {continue; }
+				if (value === 0) { continue; }
 
 				for (const children of target.children) {
 					if (!children.id.includes('handle')) {
 						continue;
 					}
-					
+
 					let tooltipId = children.id.replaceAll("~", "-").replaceAll("handle", "tooltip");
 					let tooltip = $('#' + tooltipId);
 
@@ -182,7 +182,7 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 
 	// Overflow
 	$(".QuestionBody").css('overflow', 'visible');
-    $(".BorderColor").css('overflow', 'visible');
+	$(".BorderColor").css('overflow', 'visible');
 });
 
 Qualtrics.SurveyEngine.addOnUnload(function () {

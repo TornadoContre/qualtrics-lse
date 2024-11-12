@@ -23,7 +23,9 @@
     white-space: pre-line;
 }
 
-@media (max-width: 480px) { /* Value can be adjusted. 1024 to ensure only monitors and laptops. */
+@media (max-width: 480px) {
+
+    /* Value can be adjusted. 1024 to ensure only monitors and laptops. */
     .tooltip:before {
         font-size: 12px;
     }
@@ -68,7 +70,9 @@
     white-space: pre-line;
 }
 
-@media (max-width: 480px) { /* Value can be adjusted. 1024 to ensure only monitors and laptops. */
+@media (max-width: 480px) {
+
+    /* Value can be adjusted. 1024 to ensure only monitors and laptops. */
     .matrix-tooltip:before {
         width: 190px;
         font-size: 12px;
@@ -224,7 +228,9 @@
     display: none;
 }
 
-@media (max-width: 480px) { /* Value can be adjusted. 1024 to ensure only monitors and laptops. */
+@media (max-width: 480px) {
+
+    /* Value can be adjusted. 1024 to ensure only monitors and laptops. */
     .mensaje {
         width: 190px;
         font-size: 12px;

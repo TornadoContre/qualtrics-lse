@@ -1,5 +1,4 @@
-Qualtrics.SurveyEngine.addOnload(function()
-{
+Qualtrics.SurveyEngine.addOnload(function () {
 	/*Place your JavaScript here to run when the page loads*/
 	// Setting variables
 	const pairNumber = 1;
@@ -15,12 +14,12 @@ Qualtrics.SurveyEngine.addOnload(function()
 	// Custom start
 	this.setChoiceValue(firstChoiceKey, modifiedValue);
 	this.setChoiceValue(secondChoiceKey, bValue);
-	
+
 	// Disable Track, remove Handle and add slider format
-    let firstTrack = $("#" + questionId + " ." + questionId + "-" + firstChoiceKey + "-track");
+	let firstTrack = $("#" + questionId + " ." + questionId + "-" + firstChoiceKey + "-track");
 	let firstHandle = $("#" + questionId + " ." + questionId + "-" + firstChoiceKey + "-handle");
 	let firstInput = $("#" + questionId + " ." + questionId + "-" + firstChoiceKey + "-result");
-	firstTrack.css({"pointer-events": "none", "height": "25px"})
+	firstTrack.css({ "pointer-events": "none", "height": "25px" })
 	firstHandle.css("display", "none");
 	firstInput.css("display", "none");
 	firstTrack.addClass("slider");
@@ -28,7 +27,7 @@ Qualtrics.SurveyEngine.addOnload(function()
 	firstTrack[0].style.setProperty("--gradient-end", aValue + "%")
 	firstTrack[0].style.setProperty("--color-1", "#FF7F7F")
 	firstTrack[0].style.setProperty("--color-2", "red")
-	
+
 	// Add first track messages
 	function addMessage(track, msg, idNumber, leftPosition) {
 		let msgId = questionId + "~MSG~" + idNumber;
@@ -75,48 +74,46 @@ Qualtrics.SurveyEngine.addOnload(function()
 	$(".QuestionBody BorderColor").css('overflow', 'visible');
 });
 
-Qualtrics.SurveyEngine.addOnReady(function()
-{
+Qualtrics.SurveyEngine.addOnReady(function () {
 	/*Place your JavaScript here to run when the page is fully displayed*/
-    // Setting variables
-    let $ = jQuery;
-    let questionId = this.questionId;
-    const pairNumber = 1;
-    const secondChoiceKey = 2;
+	// Setting variables
+	let $ = jQuery;
+	let questionId = this.questionId;
+	const pairNumber = 1;
+	const secondChoiceKey = 2;
 	let bValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_pairValue_B"))
 
-    // Function
-    const callback = function (mutationsList, observer) {
-        for (const mutation of mutationsList) {
-            if (mutation.type === "attributes" && mutation.attributeName === "aria-valuenow") {
-                let target = mutation.target;
+	// Function
+	const callback = function (mutationsList, observer) {
+		for (const mutation of mutationsList) {
+			if (mutation.type === "attributes" && mutation.attributeName === "aria-valuenow") {
+				let target = mutation.target;
 				const currentValue = parseInt(target.getAttribute("aria-valuenow"));
 				let finalValue = currentValue;
-                if (currentValue < bValue) {
+				if (currentValue < bValue) {
 					finalValue = bValue
-                }
+				}
 				target.style.setProperty("--gradient-end", finalValue + "%")
 				//let inputValue = $("#" + questionId + " ." + questionId + "-" + secondChoiceKey + "-true-result");
 				//inputValue.attr("value", finalValue)
-            }
-        }
-    }
+			}
+		}
+	}
 
-    // Set the observer
-    const config = { attributes: true };
-    let secondTrack = $("#" + questionId + " ." + questionId + "-" + secondChoiceKey + "-track");
-    if (secondTrack.length > 0) {
-        let observer = new MutationObserver(callback)
-        observer.observe(secondTrack[0], config)
-    }
+	// Set the observer
+	const config = { attributes: true };
+	let secondTrack = $("#" + questionId + " ." + questionId + "-" + secondChoiceKey + "-track");
+	if (secondTrack.length > 0) {
+		let observer = new MutationObserver(callback)
+		observer.observe(secondTrack[0], config)
+	}
 
 	// Overflow
 	$(".QuestionBody").css('overflow', 'visible');
-    $(".BorderColor").css('overflow', 'visible');
+	$(".BorderColor").css('overflow', 'visible');
 });
 
-Qualtrics.SurveyEngine.addOnUnload(function()
-{
+Qualtrics.SurveyEngine.addOnUnload(function () {
 	/*Place your JavaScript here to run when the page is unloaded*/
 
 });
