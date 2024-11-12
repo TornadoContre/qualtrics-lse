@@ -35,11 +35,11 @@
 
 
 ///// 50% Trade offs
-<u><span class="matrix-tooltip" style="color:#2980b9;" data-text="${e://Field/1_pairSpan_A}"><b>${e://Field/1_pairName_A}</b></span></u> <br /> Difference: $e{ (e://Field/1_pairValue_A / 2) - e://Field/1_pairValue_A} <br /> Old Value: ${e://Field/1_pairValue_A} <br /> New Value: $e{ e://Field/1_pairValue_A / 2 }
-<u><span class="matrix-tooltip" style="color:#2980b9;" data-text="${e://Field/1_pairSpan_B}"><b>${e://Field/1_pairName_B}</b></span></u> <br /> Old Value: ${e://Field/1_pairValue_B}
+<span class="matrix-tooltip" style="color:#2980b9;" data-text="${e://Field/1_pairSpan_A}"><b>${e://Field/1_pairName_A}</b> <sup>&#9432;</sup></span> <br /> Old Value: ${e://Field/1_pairValue_A} <br /> New Value: $e{ round( ( e://Field/1_pairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) } <br /> Difference: $e{ round( ( e://Field/1_pairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) - ( e://Field/1_pairValue_A ) }
+<span class="matrix-tooltip" style="color:#2980b9;" data-text="${e://Field/1_pairSpan_B}"><b>${e://Field/1_pairName_B}</b> <sup>&#9432;</sup></span> <br /> Old Value: ${e://Field/1_pairValue_B}
 
-<u><span class="matrix-tooltip" style="color:#2980b9;" data-text="${e://Field/2_pairSpan_A}"><b>${e://Field/2_pairName_A}</b></span></u> <br /> Difference: $e{ (e://Field/2_pairValue_A / 2) - e://Field/2_pairValue_A} <br /> Old Value: ${e://Field/2_pairValue_A} <br /> New Value: $e{ e://Field/2_pairValue_A / 2 }
-<u><span class="matrix-tooltip" style="color:#2980b9;" data-text="${e://Field/2_pairSpan_B}"><b>${e://Field/2_pairName_B}</b></span></u> <br /> Old Value: ${e://Field/2_pairValue_B}
+<span class="matrix-tooltip" style="color:#2980b9;" data-text="${e://Field/2_pairSpan_A}"><b>${e://Field/2_pairName_A}</b> <sup>&#9432;</sup></span> <br /> Old Value: ${e://Field/2_pairValue_A} <br /> New Value: $e{ round( ( e://Field/2_pairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) } <br /> Difference: $e{ round( ( e://Field/2_pairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) - ( e://Field/2_pairValue_A ) }
+<span class="matrix-tooltip" style="color:#2980b9;" data-text="${e://Field/2_pairSpan_B}"><b>${e://Field/2_pairName_B}</b> <sup>&#9432;</sup></span> <br /> Old Value: ${e://Field/2_pairValue_B}
 
-<u><span class="matrix-tooltip" style="color:#2980b9;" data-text="${e://Field/3_pairSpan_A}"><b>${e://Field/3_pairName_A}</b></span></u> <br /> Difference: $e{ (e://Field/3_pairValue_A / 2) - e://Field/3_pairValue_A} <br /> Old Value: ${e://Field/3_pairValue_A} <br /> New Value: $e{ e://Field/3_pairValue_A / 2 }
-<u><span class="matrix-tooltip" style="color:#2980b9;" data-text="${e://Field/3_pairSpan_B}"><b>${e://Field/3_pairName_B}</b></span></u> <br /> Old Value: ${e://Field/3_pairValue_B}
+<span class="matrix-tooltip" style="color:#2980b9;" data-text="${e://Field/3_pairSpan_A}"><b>${e://Field/3_pairName_A}</b> <sup>&#9432;</sup></span> <br /> Old Value: ${e://Field/3_pairValue_A} <br /> New Value: $e{ round( ( e://Field/3_pairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) } <br /> Difference: $e{ round( ( e://Field/3_pairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) - ( e://Field/3_pairValue_A ) }
+<span class="matrix-tooltip" style="color:#2980b9;" data-text="${e://Field/3_pairSpan_B}"><b>${e://Field/3_pairName_B}</b> <sup>&#9432;</sup></span> <br /> Old Value: ${e://Field/3_pairValue_B}
