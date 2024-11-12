@@ -18,13 +18,13 @@ Qualtrics.SurveyEngine.addOnload(function()
             tooltipObj.removeClassName("tooltip");
         }
 	}
-
 });
 
 Qualtrics.SurveyEngine.addOnReady(function()
 {
 	/*Place your JavaScript here to run when the page is fully displayed*/
-
+    jQuery(".QuestionBody").css('overflow', 'visible');
+    jQuery(".BorderColor").css('overflow', 'visible');
 });
 
 Qualtrics.SurveyEngine.addOnUnload(function()

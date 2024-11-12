@@ -11,7 +11,6 @@ Qualtrics.SurveyEngine.addOnload(function()
 	let aValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_pairValue_A"));
 	let modifiedValue = Math.round(parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_pairValue_A")) * (1 - percentageTradeOff));
 	let bValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_pairValue_B"));
-	console.log(percentageTradeOff);
 
 	// Custom start
 	this.setChoiceValue(firstChoiceKey, modifiedValue);
@@ -73,7 +72,7 @@ Qualtrics.SurveyEngine.addOnload(function()
 	secondTrack[0].style.setProperty("--color-1", "blue")
 	secondTrack[0].style.setProperty("--color-2", "#ADD8E6")
 
-	$(".QuestionBody.BorderColor").css('overflow', 'visible');
+	$(".QuestionBody BorderColor").css('overflow', 'visible');
 });
 
 Qualtrics.SurveyEngine.addOnReady(function()
@@ -110,6 +109,10 @@ Qualtrics.SurveyEngine.addOnReady(function()
         let observer = new MutationObserver(callback)
         observer.observe(secondTrack[0], config)
     }
+
+	// Overflow
+	$(".QuestionBody").css('overflow', 'visible');
+    $(".BorderColor").css('overflow', 'visible');
 });
 
 Qualtrics.SurveyEngine.addOnUnload(function()

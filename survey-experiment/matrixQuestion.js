@@ -72,7 +72,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 			updateAspectMap(aspectMap);
 		}
 	};
-	$(".QuestionBody.BorderColor").css('overflow', 'visible');
+	$(".QuestionBody BorderColor").css('overflow', 'visible');
 });
 
 Qualtrics.SurveyEngine.addOnReady(function () {
@@ -180,6 +180,9 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 		}
 	}
 
+	// Overflow
+	$(".QuestionBody").css('overflow', 'visible');
+    $(".BorderColor").css('overflow', 'visible');
 });
 
 Qualtrics.SurveyEngine.addOnUnload(function () {
