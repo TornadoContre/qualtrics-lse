@@ -17,7 +17,8 @@ Qualtrics.SurveyEngine.addOnload(function () {
 	let regex = />([^<]+)</;
 	for (const choiceKey in choices) {
 		// Extract text from the div block
-		const text = choices[choiceKey].Text;
+		let text = choices[choiceKey].Text;
+		text = text.replace(" <sup>&#9432;</sup>", "");
 		const matchedKey = text.match(regex);
 		if (!matchedKey) {
 			// Choice without extra markers
@@ -77,7 +78,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 Qualtrics.SurveyEngine.addOnReady(function () {
 	/*Place your JavaScript here to run when the page is fully displayed*/
 	// Setting variables
-	let disableMarkers = true; // Set to 'true' to disable markers
+	let disableMarkers = false; // Set to 'true' to disable markers
 	let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
 	let aspectMap = JSON.parse(aspectMapString);
 	let questionId = this.questionId;
@@ -92,7 +93,8 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 				const value = parseInt(target.getAttribute("aria-valuenow"));
 
 				const aspectId = target.id.replace('track', 'text');
-				const aspectName = $("[id='" + aspectId + "']")[0].textContent.strip();
+				let aspectName = $("[id='" + aspectId + "']")[0].textContent.strip();
+				aspectName = aspectName.replace(" ⓘ", "");
 				let aspectObj = aspectMap.find(element => element.name === aspectName);
 				const aspectIndex = aspectMap.indexOf(aspectObj);
 				if (aspectIndex === -1) { continue; }
@@ -122,6 +124,17 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 					// Updates the message value
 					setTimeout(() => {
 						tooltip.text(msg);
+						if (value >= 90) {
+							const m = (60 - 47) / (100 - 90);
+							const y = Math.round((value - 90) * m + 47, 3);
+							tooltip.css('transform', "translateX(-" + y + "%)");
+						} else if (value <= 10) {
+							const m = (30 - 47) / (0 - 10);
+							const y = Math.round((value - 10) * m + 47, 3);
+							tooltip.css('transform', "translateX(-" + y + "%)");
+						} else {
+							tooltip.css('transform', 'translateX(-47%)');
+						}
 					}, 10) // Little timer to allow renderization
 
 					if (!timerStarted[aspectIndex]) {
@@ -134,7 +147,7 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 						setTimeout(() => {
 							timerStarted[aspectIndex] = false;
 							tooltip.removeClass('show');
-						}, 3000);
+						}, 2500);
 					}
 				}
 			}
@@ -148,7 +161,8 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 	let regex = />([^<]+)</;
 	for (const choiceKey in choices) {
 		// Extracts text from the div block
-		const text = choices[choiceKey].Text;
+		let text = choices[choiceKey].Text;
+		text = text.replace(" <sup>&#9432;</sup>", "");
 		const matchedKey = text.match(regex);
 		if (!matchedKey) {
 			// Choice without extra markers

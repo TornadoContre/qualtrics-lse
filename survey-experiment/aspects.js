@@ -36,14 +36,12 @@ Qualtrics.SurveyEngine.addOnload(function () {
         { "subset": false, "name": "Quality of the Natural Environment", "span": "This includes the presence, diversity and quality of green spaces, such as mountains, canyons, forests, meadows and grasslands, and larger parks, but also wildlife and animals as well as rivers, lakes, coastal areas, and the quality of the air in your area. Absence, pollution and destruction mean lower quality of the natural environment.", "markers": { "0-25": "There is no natural environment or it is of very poor quality/very polluted or destroyed.", "25-50": "There is some natural environment, but not a lot and/or of rather poor quality/somewhat polluted or destroyed.", "50-75": "There is good quality natural environment, even if somewhat polluted/destructed.", "75-100": "There is a lot of good quality natural environment, with very little or no pollution or destruction." } },
     ]
 
-
     const otherArray = [
         { "name": "Other (please specify)", "span": "" },
         { "name": "Other (please specify)", "span": "" },
     ]
     aspectMap = reorderSubsets(aspectMap);
     aspectMap = [...aspectMap, ...otherArray];
-    console.log(aspectMap)
 
     var aspectMapString = JSON.stringify(aspectMap);
     Qualtrics.SurveyEngine.setEmbeddedData('aspectMapString', aspectMapString);
