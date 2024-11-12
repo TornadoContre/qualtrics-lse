@@ -1,3 +1,9 @@
+@media (min-width: 768px) { /* Value can be adjusted. 1024 to ensure only monitors and laptops. */
+    #SkinContent { 
+        width: 60vw; 
+    }
+}
+
 /*NOTAS: Para hacer hacer salto de línea usar estos caracteres especiales: &#013;&#010; */
 .tooltip {
     position: relative;
@@ -42,7 +48,6 @@
 
 .matrix-tooltip {
     position: relative;
-    border-bottom: 1px dashed #000;
 }
 
 .matrix-tooltip:before {
