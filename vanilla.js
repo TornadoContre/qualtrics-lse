@@ -120,17 +120,16 @@ function imprimirEmbeddedVariables(N) {
         tradeOffTypes.forEach((tradeOffType) => {
             for(let i = 1; i <= N; i++) {
                 pairCase.forEach((pair) => {
-                    //\${e://Field/aspectSpan4}
-                    console.log(`\${e://Field/${i}_${sectionKey}${tradeOffType}PairName_${pair}}`)
-                    console.log(`\${e://Field/${i}_${sectionKey}${tradeOffType}PairValue_${pair}}`)
-                    console.log(`\${e://Field/${i}_${sectionKey}${tradeOffType}PairNewValue_${pair}}`)
-                    console.log(`\${e://Field/${i}_${sectionKey}${tradeOffType}PairSpan_${pair}}`)
-                    console.log(`\${e://Field/${i}_${sectionKey}${tradeOffType}PairArrows_${pair}}`)
+                    console.log(`${i}_${sectionKey}${tradeOffType}PairName_${pair}`)
+                    console.log(`${i}_${sectionKey}${tradeOffType}PairValue_${pair}`)
+                    console.log(`${i}_${sectionKey}${tradeOffType}PairNewValue_${pair}`)
+                    //console.log(`${i}_${sectionKey}${tradeOffType}PairSpan_${pair}`)
+                    //console.log(`${i}_${sectionKey}${tradeOffType}PairArrows_${pair}`)
                 })
-                console.log("");
+                console.log("")
             }
         })
     })
 }
 
-imprimirEmbeddedVariables(3)
+imprimirEmbeddedVariables(2)
