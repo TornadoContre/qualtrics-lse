@@ -93,13 +93,44 @@ function imprimirHtmlAspectos(N) {
     }
 }
 
+function imprimirHtmlTradeoffs(N) {
+    console.log("##### Trade Offs #####")
+    for (let i = 1; i <= N; i++) {
+        console.log(`<span data-text="\${e://Field/${i}_generalTradePairSpan_A}" class="tooltip"><b>\${e://Field/${i}_generalTradePairName_A}</b></span> <br /> <br />Old Value: \${e://Field/${i}_generalTradePairValue_A} <br /> New value: \${e://Field/${i}_generalTradePairNewValue_A} <br /> Difference: \$e{ e://Field/${i}_generalTradePairNewValue_A - e://Field/${i}_generalTradePairValue_A} <br /> <strong>\${e://Field/${i}_generalTradePairArrows_A}</strong><br /><center><input style="--gradient-start: \${e://Field/${i}_generalTradePairValue_A}%; --gradient-end: \${e://Field/${i}_generalTradePairNewValue_A}%; --color-1: #FF7F7F; --color-2: red" class="slider" list="tickmarks" max="100" min="0" step="1" type="range" value=""/><div class="sliderticks"><p>0</p><p>10</p><p>20</p><p>30</p><p>40</p><p>50</p><p>60</p><p>70</p><p>80</p><p>90</p><p>100</p></div></center>`);
+        console.log(`<span data-text="\${e://Field/${i}_generalTradePairSpan_B}" class="tooltip"><b>\${e://Field/${i}_generalTradePairName_B}</b></span> <br /> <br />Old Value: \${e://Field/${i}_generalTradePairValue_B} <br /> New value: \${e://Field/${i}_generalTradePairNewValue_B} <br /> Difference: \$e{ e://Field/${i}_generalTradePairNewValue_B - e://Field/${i}_generalTradePairValue_B} <br /> <strong>\${e://Field/${i}_generalTradePairArrows_B}</strong><br /><center><input style="--gradient-start: \${e://Field/${i}_generalTradePairValue_B}%; --gradient-end: \${e://Field/${i}_generalTradePairNewValue_B}%; --color-1: #ADD8E6; --color-2: blue" class="slider" list="tickmarks" max="100" min="0" step="1" type="range" value=""/><div class="sliderticks"><p>0</p><p>10</p><p>20</p><p>30</p><p>40</p><p>50</p><p>60</p><p>70</p><p>80</p><p>90</p><p>100</p></div></center>`);
+        console.log("");
+    }
+}
+
 function imprimirHtml50Tradeoffs(N) {
     console.log("##### 50 Trade Offs #####")
     for (let i = 1; i <= N; i++) {
-        console.log(`<span class="matrix-tooltip" style="color:#2980b9;" data-text="\${e://Field/${i}_pairSpan_A}"><b>\${e://Field/${i}_pairName_A}</b> <sup>&#9432;</sup></span> <br /> Old Value: \${e://Field/${i}_pairValue_A} <br /> New Value: \$e{ round( ( e://Field/${i}_pairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) } <br /> Difference: \$e{ round( ( e://Field/${i}_pairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) - ( e://Field/${i}_pairValue_A ) }`);
+        console.log(`<span class="matrix-tooltip" style="color:#2980b9;" data-text="\${e://Field/${i}_pairSpan_B}"><b>\${e://Field/${i}_pairName_A}</b> <sup>&#9432;</sup></span> <br /> Old Value: \${e://Field/${i}_pairValue_A} <br /> New Value: \$e{ round( ( e://Field/${i}_pairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) } <br /> Difference: \$e{ round( ( e://Field/${i}_pairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) - ( e://Field/${i}_pairValue_A ) }`);
         console.log(`<span class="matrix-tooltip" style="color:#2980b9;" data-text="\${e://Field/${i}_pairSpan_B}"><b>\${e://Field/${i}_pairName_B}</b> <sup>&#9432;</sup></span> <br /> Old Value: \${e://Field/${i}_pairValue_B}`);
         console.log("");
     }
 }
 
-imprimirHtmlAspectos(14)
+function imprimirEmbeddedVariables(N) {
+    console.log("##### Embedded Variables #####")
+    const sections = ["general", "policy"];
+    const tradeOffTypes = ["Trade", "50Trade"];
+    const pairCase = ["A", "B"];
+    sections.forEach((sectionKey) => {
+        tradeOffTypes.forEach((tradeOffType) => {
+            for(let i = 1; i <= N; i++) {
+                pairCase.forEach((pair) => {
+                    //\${e://Field/aspectSpan4}
+                    console.log(`\${e://Field/${i}_${sectionKey}${tradeOffType}PairName_${pair}}`)
+                    console.log(`\${e://Field/${i}_${sectionKey}${tradeOffType}PairValue_${pair}}`)
+                    console.log(`\${e://Field/${i}_${sectionKey}${tradeOffType}PairNewValue_${pair}}`)
+                    console.log(`\${e://Field/${i}_${sectionKey}${tradeOffType}PairSpan_${pair}}`)
+                    console.log(`\${e://Field/${i}_${sectionKey}${tradeOffType}PairArrows_${pair}}`)
+                })
+                console.log("");
+            }
+        })
+    })
+}
+
+imprimirEmbeddedVariables(3)
