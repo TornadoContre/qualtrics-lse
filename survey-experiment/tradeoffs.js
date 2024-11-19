@@ -8,11 +8,11 @@ Qualtrics.SurveyEngine.addOnload(function () {
     let choices = this.getQuestionInfo().Choices;
     for (const choiceKey in choices) {
         let elementId = "#" + questionId + "-" + choiceKey + "-label";
-        $(elementId + " span").css({ "width": "100%" });
+        $(elementId + " span").css({ "width": "100%", "text-align": "center" });
+        // float: none para poner la barra en buena relacion con los ticks
 
         let tooltipObj = $(elementId + " span.tooltip")[0];
-        let tooltipText = tooltipObj.getAttribute("data-text");
-        if (tooltipText === "") {
+        if (tooltipObj && tooltipObj.getAttribute("data-text") === "") {
             tooltipObj.removeAttribute("data-text");
             tooltipObj.removeClassName("tooltip");
         }
