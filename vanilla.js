@@ -93,20 +93,20 @@ function imprimirHtmlAspectos(N) {
     }
 }
 
-function imprimirHtmlTradeoffs(N) {
+function imprimirHtmlTradeoffs(N, type_) {
     console.log("##### Trade Offs #####")
     for (let i = 1; i <= N; i++) {
-        console.log(`<span data-text="\${e://Field/${i}_generalTradePairSpan_A}" class="tooltip"><b>\${e://Field/${i}_generalTradePairName_A}</b></span> <br /> <br />Old Value: \${e://Field/${i}_generalTradePairValue_A} <br /> New value: \${e://Field/${i}_generalTradePairNewValue_A} <br /> Difference: \$e{ e://Field/${i}_generalTradePairNewValue_A - e://Field/${i}_generalTradePairValue_A} <br /> <strong>\${e://Field/${i}_generalTradePairArrows_A}</strong><br /><center><input style="--gradient-start: \${e://Field/${i}_generalTradePairValue_A}%; --gradient-end: \${e://Field/${i}_generalTradePairNewValue_A}%; --color-1: #FF7F7F; --color-2: red" class="slider" list="tickmarks" max="100" min="0" step="1" type="range" value=""/><div class="sliderticks"><p>0</p><p>10</p><p>20</p><p>30</p><p>40</p><p>50</p><p>60</p><p>70</p><p>80</p><p>90</p><p>100</p></div></center>`);
-        console.log(`<span data-text="\${e://Field/${i}_generalTradePairSpan_B}" class="tooltip"><b>\${e://Field/${i}_generalTradePairName_B}</b></span> <br /> <br />Old Value: \${e://Field/${i}_generalTradePairValue_B} <br /> New value: \${e://Field/${i}_generalTradePairNewValue_B} <br /> Difference: \$e{ e://Field/${i}_generalTradePairNewValue_B - e://Field/${i}_generalTradePairValue_B} <br /> <strong>\${e://Field/${i}_generalTradePairArrows_B}</strong><br /><center><input style="--gradient-start: \${e://Field/${i}_generalTradePairValue_B}%; --gradient-end: \${e://Field/${i}_generalTradePairNewValue_B}%; --color-1: #ADD8E6; --color-2: blue" class="slider" list="tickmarks" max="100" min="0" step="1" type="range" value=""/><div class="sliderticks"><p>0</p><p>10</p><p>20</p><p>30</p><p>40</p><p>50</p><p>60</p><p>70</p><p>80</p><p>90</p><p>100</p></div></center>`);
+        console.log(`<span data-text="\${e://Field/${i}_${type_}TradePairSpan_A}" class="tooltip"><b>\${e://Field/${i}_${type_}TradePairName_A}</b></span> <br /> <br />Old Value: \${e://Field/${i}_${type_}TradePairValue_A} <br /> New value: \${e://Field/${i}_${type_}TradePairNewValue_A} <br /> Difference: \$e{ e://Field/${i}_${type_}TradePairNewValue_A - e://Field/${i}_${type_}TradePairValue_A} <br /> <strong>\${e://Field/${i}_${type_}TradePairArrows_A}</strong><br /><center><input style="--gradient-start: \${e://Field/${i}_${type_}TradePairValue_A}%; --gradient-end: \${e://Field/${i}_${type_}TradePairNewValue_A}%; --color-1: #FF7F7F; --color-2: red" class="slider" list="tickmarks" max="100" min="0" step="1" type="range" value=""/><div class="sliderticks"><p>0</p><p>10</p><p>20</p><p>30</p><p>40</p><p>50</p><p>60</p><p>70</p><p>80</p><p>90</p><p>100</p></div></center>`);
+        console.log(`<span data-text="\${e://Field/${i}_${type_}TradePairSpan_B}" class="tooltip"><b>\${e://Field/${i}_${type_}TradePairName_B}</b></span> <br /> <br />Old Value: \${e://Field/${i}_${type_}TradePairValue_B} <br /> New value: \${e://Field/${i}_${type_}TradePairNewValue_B} <br /> Difference: \$e{ e://Field/${i}_${type_}TradePairNewValue_B - e://Field/${i}_${type_}TradePairValue_B} <br /> <strong>\${e://Field/${i}_${type_}TradePairArrows_B}</strong><br /><center><input style="--gradient-start: \${e://Field/${i}_${type_}TradePairValue_B}%; --gradient-end: \${e://Field/${i}_${type_}TradePairNewValue_B}%; --color-1: #ADD8E6; --color-2: blue" class="slider" list="tickmarks" max="100" min="0" step="1" type="range" value=""/><div class="sliderticks"><p>0</p><p>10</p><p>20</p><p>30</p><p>40</p><p>50</p><p>60</p><p>70</p><p>80</p><p>90</p><p>100</p></div></center>`);
         console.log("");
     }
 }
 
-function imprimirHtml50Tradeoffs(N) {
+function imprimirHtml50Tradeoffs(N, type_) {
     console.log("##### 50 Trade Offs #####")
     for (let i = 1; i <= N; i++) {
-        console.log(`<span class="matrix-tooltip" style="color:#2980b9;" data-text="\${e://Field/${i}_pairSpan_B}"><b>\${e://Field/${i}_pairName_A}</b> <sup>&#9432;</sup></span> <br /> Old Value: \${e://Field/${i}_pairValue_A} <br /> New Value: \$e{ round( ( e://Field/${i}_pairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) } <br /> Difference: \$e{ round( ( e://Field/${i}_pairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) - ( e://Field/${i}_pairValue_A ) }`);
-        console.log(`<span class="matrix-tooltip" style="color:#2980b9;" data-text="\${e://Field/${i}_pairSpan_B}"><b>\${e://Field/${i}_pairName_B}</b> <sup>&#9432;</sup></span> <br /> Old Value: \${e://Field/${i}_pairValue_B}`);
+        console.log(`<span class="matrix-tooltip" style="color:#2980b9;" data-text="\${e://Field/${i}_${type_}50TradePairSpan_A}"><b>\${e://Field/${i}_${type_}50TradePairName_A}</b> <sup>&#9432;</sup></span> <br /> Old Value: \${e://Field/${i}_${type_}50TradePairValue_A} <br /> New Value: \$e{ round( ( e://Field/${i}_${type_}50TradePairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) } <br /> Difference: \$e{ round( ( e://Field/${i}_${type_}50TradePairValue_A ) * ( 1 - e://Field/percentageTradeOff ) , 0 ) - ( e://Field/${i}_${type_}50TradePairValue_A ) }`);
+        console.log(`<span class="matrix-tooltip" style="color:#2980b9;" data-text="\${e://Field/${i}_${type_}50TradePairSpan_B}"><b>\${e://Field/${i}_${type_}50TradePairName_B}</b> <sup>&#9432;</sup></span> <br /> Old Value: \${e://Field/${i}_${type_}50TradePairValue_B}`);
         console.log("");
     }
 }
@@ -132,4 +132,6 @@ function imprimirEmbeddedVariables(N) {
     })
 }
 
-imprimirEmbeddedVariables(2)
+imprimirHtmlTradeoffs(3, "policy")
+console.log("")
+imprimirHtml50Tradeoffs(3, "policy")
