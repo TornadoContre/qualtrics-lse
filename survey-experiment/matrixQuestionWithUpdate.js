@@ -5,7 +5,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 	}
 
 	// Setting variables
-	let personalQuestion = true; // true if is a 'personal' question. false for political/societary question
+	let personalQuestion = false; // true if is a 'personal' question. false for political/societary question
 	let nameKey = personalQuestion ? 'personalName' : 'socialName';
 	let responseKey = personalQuestion ? 'personalResponseValue' : 'socialResponseValue';
 	let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
@@ -186,6 +186,119 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 });
 
 Qualtrics.SurveyEngine.addOnUnload(function () {
-	/*Place your JavaScript here to run when the page is unloaded*/
+	/*Place your JavaScript here to run when the page loads*/
+	function getRandomIndex(max) {
+        return Math.floor(Math.random() * max);
+    }
 
+    function factorial(n) {
+        if (n === 0 || n === 1) {
+            return 1;
+        } else {
+            return n * factorial(n - 1);
+        }
+    }
+
+    function createUniquePairs(array, totalPairs) {
+        // Check we have enough elements
+        const K = 2;
+        const elements = array.length;
+        let totalCombinations = (factorial(elements) / (factorial(K) * factorial(elements - K)));
+
+        if (elements <= 1 || totalPairs > totalCombinations) {
+            throw new Error("Not enough elements. Max combinations: " + totalCombinations);
+        }
+
+        let pairs = new Set();
+
+        // Creates unique pares
+        while (pairs.size < totalPairs) {
+            let i = getRandomIndex(elements);
+            let j = getRandomIndex(elements);
+
+            // Checks that i != j and pai (i, j) is unique
+            if (i !== j) {
+                let pair = [i, j].sort((a, b) => a - b).toString();
+                pairs.add(pair);
+            }
+        }
+
+        // Array as array of pairs
+        return [...pairs].map(pair => pair.split(',').map(Number));
+    }
+
+	function getRandomSign(valueA, valueB) {
+		if (Math.min(valueA, valueB) === 0) {
+			return 1;
+		} else if (Math.max(valueA, valueB) === 100) {
+			return -1;
+		} else {
+			return Math.random() > 0.5 ? 1 : -1;
+		}
+	}
+
+	// Return a random integer between 1 and 10
+	function getRandomMagnitude() {
+		const rand = Math.random();
+		const maxMagnitude = 10;
+		const minMagnitude = 1;
+		let magnitude = (maxMagnitude - minMagnitude) * rand + minMagnitude;
+		return Math.round(magnitude);
+	}
+
+	function applyRandomMagnitude(value, magnitude, sign) {
+		var newValue = value + magnitude * sign;
+		newValue = Math.min(100, newValue);
+		newValue = Math.max(0, newValue);
+		return newValue;
+	}
+
+	// Setting variables
+	const increaseArrow = '&#8680&nbsp';
+	const decreaseArrow = '&#8678&nbsp';
+	const pairCase = ["A", "B"];
+	const pairNameSuffix = "PairName_";
+	const pairValueSuffix = "PairValue_";
+	const pairNewValueSuffix = "PairNewValue_";
+	const pairSpanSuffix = "PairSpan_";
+	const pairArrowsSuffix = "PairArrows_";
+	const personalQuestionOptions = [true, false]; // true if is a 'personal' question. false for political/societary question
+	const tradeOffTypes = ["Trade", "50Trade"];
+
+	const numberOfPairs = parseInt("${e://Field/numberOfPairs}"); // Must be the max value between the number of pairs in each section
+	const aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
+	const aspectMap = JSON.parse(aspectMapString);
+	
+	for(const personalQuestion of personalQuestionOptions) {
+		let sectionKey = personalQuestion ? '_general' : '_policy'
+		let nameKey = personalQuestion ? 'personalName' : 'socialName';
+		let responseKey = personalQuestion ? 'personalResponseValue' : 'socialResponseValue';
+
+		// Remove empty aspects
+		let localAspectMap = aspectMap.filter((aspect) => aspect[nameKey] ? aspect[nameKey] !== '' : false);
+
+		tradeOffTypes.forEach((tradeOffType) => {
+			// Let's pair things
+			let uniquePairs = createUniquePairs(localAspectMap, numberOfPairs);
+			uniquePairs.forEach((pair, i) => {
+				i = i + 1;
+				let aValue = parseInt(aspectMap[pair[0]][responseKey]);
+				let bValue = parseInt(aspectMap[pair[1]][responseKey]);
+				let sign = getRandomSign(aValue, bValue);
+				pair.map((element, j) => {
+					const oldValue = parseInt(aspectMap[element][responseKey]);
+					const magnitude = getRandomMagnitude();
+					const newValue = applyRandomMagnitude(oldValue, magnitude, sign);
+					const arrow = sign > 0 ? increaseArrow : decreaseArrow;
+					const arrows = arrow.repeat(magnitude);
+		
+					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairNameSuffix + pairCase[j], aspectMap[element][nameKey])
+					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairValueSuffix + pairCase[j], oldValue);
+					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairNewValueSuffix + pairCase[j], newValue);
+					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairSpanSuffix + pairCase[j], aspectMap[element].span);
+					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairArrowsSuffix + pairCase[j], arrows);
+				})
+			})
+		})
+	}
 });

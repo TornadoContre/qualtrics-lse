@@ -2,14 +2,15 @@ Qualtrics.SurveyEngine.addOnload(function () {
 	/*Place your JavaScript here to run when the page loads*/
 	// Setting variables
 	const pairNumber = 1;
+	const type_ = "general"; // Values: `general` or `policy`
 	let questionId = this.questionId;
 	let $ = jQuery;
 	const firstChoiceKey = 1;
 	const secondChoiceKey = 2;
 	const percentageTradeOff = parseFloat(Qualtrics.SurveyEngine.getEmbeddedData("percentageTradeOff"));
-	let aValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_pairValue_A"));
-	let modifiedValue = Math.round(parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_pairValue_A")) * (1 - percentageTradeOff));
-	let bValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_pairValue_B"));
+	let aValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_" + type_ + "50TradePairValue_A"));
+	let modifiedValue = Math.round(parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_" + type_ + "50TradePairValue_A")) * (1 - percentageTradeOff));
+	let bValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_" + type_ + "50TradePairValue_B"));
 
 	// Custom start
 	this.setChoiceValue(firstChoiceKey, modifiedValue);
@@ -77,11 +78,13 @@ Qualtrics.SurveyEngine.addOnload(function () {
 Qualtrics.SurveyEngine.addOnReady(function () {
 	/*Place your JavaScript here to run when the page is fully displayed*/
 	// Setting variables
+	const pairNumber = 1;
+	const type_ = "general"; // Values: `general` or `policy`
+	
 	let $ = jQuery;
 	let questionId = this.questionId;
-	const pairNumber = 1;
 	const secondChoiceKey = 2;
-	let bValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_pairValue_B"))
+	let bValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_" + type_ + "50TradePairValue_B"))
 
 	// Function
 	const callback = function (mutationsList, observer) {
