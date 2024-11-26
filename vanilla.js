@@ -134,5 +134,6 @@ function imprimirEmbeddedVariables(N) {
 
 //imprimirHtmlTradeoffs(3, "general")
 //imprimirHtmlTradeoffs(3, "policy")
-imprimirHtml50Tradeoffs(3, "general")
-imprimirHtml50Tradeoffs(3, "policy")
+//imprimirHtml50Tradeoffs(3, "general")
+//imprimirHtml50Tradeoffs(3, "policy")
+imprimirEmbeddedVariables(3)

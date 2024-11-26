@@ -265,6 +265,7 @@ Qualtrics.SurveyEngine.addOnUnload(function () {
 	const personalQuestionOptions = [true, false]; // true if is a 'personal' question. false for political/societary question
 	const tradeOffTypes = ["Trade", "50Trade"];
 
+	const percentageTradeOff = parseFloat(Qualtrics.SurveyEngine.getEmbeddedData("percentageTradeOff"));
 	const numberOfPairs = parseInt("${e://Field/numberOfPairs}"); // Must be the max value between the number of pairs in each section
 	const aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
 	const aspectMap = JSON.parse(aspectMapString);
@@ -287,16 +288,24 @@ Qualtrics.SurveyEngine.addOnUnload(function () {
 				let sign = getRandomSign(aValue, bValue);
 				pair.map((element, j) => {
 					const oldValue = parseInt(aspectMap[element][responseKey]);
-					const magnitude = getRandomMagnitude();
-					const newValue = applyRandomMagnitude(oldValue, magnitude, sign);
-					const arrow = sign > 0 ? increaseArrow : decreaseArrow;
-					const arrows = arrow.repeat(magnitude);
-		
+					if (tradeOffType === "Trade") {
+						const magnitude = getRandomMagnitude();
+						var newValue = applyRandomMagnitude(oldValue, magnitude, sign);
+						const arrow = sign > 0 ? increaseArrow : decreaseArrow;
+						const arrows = arrow.repeat(magnitude);
+						
+						Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairArrowsSuffix + pairCase[j], arrows);
+					} else {
+						if (pairCase[j] === "A") {
+							var newValue = Math.round(parseInt(oldValue) * (1 - percentageTradeOff));
+						}
+					}
 					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairNameSuffix + pairCase[j], aspectMap[element][nameKey])
-					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairValueSuffix + pairCase[j], oldValue);
-					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairNewValueSuffix + pairCase[j], newValue);
 					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairSpanSuffix + pairCase[j], aspectMap[element].span);
-					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairArrowsSuffix + pairCase[j], arrows);
+					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairValueSuffix + pairCase[j], oldValue);
+					if (newValue) {
+						Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairNewValueSuffix + pairCase[j], newValue);
+					}
 				})
 			})
 		})
