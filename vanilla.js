@@ -94,10 +94,10 @@ function imprimirHtmlAspectos(N) {
 }
 
 function imprimirHtmlTradeoffs(N, type_) {
-    console.log("##### Trade Offs #####")
+    console.log(`##### Trade Offs: ${type_} #####`)
     for (let i = 1; i <= N; i++) {
-        console.log(`<span data-text="\${e://Field/${i}_${type_}TradePairSpan_A}" class="tooltip"><b>\${e://Field/${i}_${type_}TradePairName_A}</b></span> <br /> <br />Old Value: \${e://Field/${i}_${type_}TradePairValue_A} <br /> New value: \${e://Field/${i}_${type_}TradePairNewValue_A} <br /> Difference: \$e{ e://Field/${i}_${type_}TradePairNewValue_A - e://Field/${i}_${type_}TradePairValue_A} <br /> <strong>\${e://Field/${i}_${type_}TradePairArrows_A}</strong><br /><center><input style="--gradient-start: \${e://Field/${i}_${type_}TradePairValue_A}%; --gradient-end: \${e://Field/${i}_${type_}TradePairNewValue_A}%; --color-1: #FF7F7F; --color-2: red" class="slider" list="tickmarks" max="100" min="0" step="1" type="range" value=""/><div class="sliderticks"><p>0</p><p>10</p><p>20</p><p>30</p><p>40</p><p>50</p><p>60</p><p>70</p><p>80</p><p>90</p><p>100</p></div></center>`);
-        console.log(`<span data-text="\${e://Field/${i}_${type_}TradePairSpan_B}" class="tooltip"><b>\${e://Field/${i}_${type_}TradePairName_B}</b></span> <br /> <br />Old Value: \${e://Field/${i}_${type_}TradePairValue_B} <br /> New value: \${e://Field/${i}_${type_}TradePairNewValue_B} <br /> Difference: \$e{ e://Field/${i}_${type_}TradePairNewValue_B - e://Field/${i}_${type_}TradePairValue_B} <br /> <strong>\${e://Field/${i}_${type_}TradePairArrows_B}</strong><br /><center><input style="--gradient-start: \${e://Field/${i}_${type_}TradePairValue_B}%; --gradient-end: \${e://Field/${i}_${type_}TradePairNewValue_B}%; --color-1: #ADD8E6; --color-2: blue" class="slider" list="tickmarks" max="100" min="0" step="1" type="range" value=""/><div class="sliderticks"><p>0</p><p>10</p><p>20</p><p>30</p><p>40</p><p>50</p><p>60</p><p>70</p><p>80</p><p>90</p><p>100</p></div></center>`);
+        console.log(`<div style="text-align: left; margin-bottom: 10px; font-weight: bold; font-size: 22px;">Option 1</div><span data-text="\${e://Field/${i}_${type_}TradePairSpan_A}" class="tooltip"><b>\${e://Field/${i}_${type_}TradePairName_A}</b></span> <br /> <br />Old Value: \${e://Field/${i}_${type_}TradePairValue_A} <br /> New value: \${e://Field/${i}_${type_}TradePairNewValue_A} <br /> Difference: \$e{ e://Field/${i}_${type_}TradePairNewValue_A - e://Field/${i}_${type_}TradePairValue_A} <br /> <strong>\${e://Field/${i}_${type_}TradePairArrows_A}</strong><br /><center><input style="--gradient-start: \${e://Field/${i}_${type_}TradePairValue_A}%; --gradient-end: \${e://Field/${i}_${type_}TradePairNewValue_A}%; --color-1: #FF7F7F; --color-2: red; float: none" class="slider" list="tickmarks" max="100" min="0" step="1" type="range" value=""/><div class="sliderticks"><p>0</p><p>10</p><p>20</p><p>30</p><p>40</p><p>50</p><p>60</p><p>70</p><p>80</p><p>90</p><p>100</p></div></center>`);
+        console.log(`<div style="text-align: left; margin-bottom: 10px; font-weight: bold; font-size: 22px;">Option 2</div><span data-text="\${e://Field/${i}_${type_}TradePairSpan_B}" class="tooltip"><b>\${e://Field/${i}_${type_}TradePairName_B}</b></span> <br /> <br />Old Value: \${e://Field/${i}_${type_}TradePairValue_B} <br /> New value: \${e://Field/${i}_${type_}TradePairNewValue_B} <br /> Difference: \$e{ e://Field/${i}_${type_}TradePairNewValue_B - e://Field/${i}_${type_}TradePairValue_B} <br /> <strong>\${e://Field/${i}_${type_}TradePairArrows_B}</strong><br /><center><input style="--gradient-start: \${e://Field/${i}_${type_}TradePairValue_B}%; --gradient-end: \${e://Field/${i}_${type_}TradePairNewValue_B}%; --color-1: #ADD8E6; --color-2: blue; float: none" class="slider" list="tickmarks" max="100" min="0" step="1" type="range" value=""/><div class="sliderticks"><p>0</p><p>10</p><p>20</p><p>30</p><p>40</p><p>50</p><p>60</p><p>70</p><p>80</p><p>90</p><p>100</p></div></center>`);
         console.log("");
     }
 }
@@ -132,6 +132,7 @@ function imprimirEmbeddedVariables(N) {
     })
 }
 
-imprimirHtmlTradeoffs(3, "policy")
-console.log("")
+//imprimirHtmlTradeoffs(3, "general")
+//imprimirHtmlTradeoffs(3, "policy")
+imprimirHtml50Tradeoffs(3, "general")
 imprimirHtml50Tradeoffs(3, "policy")

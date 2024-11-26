@@ -10,9 +10,20 @@
 </head>
 
 <body>
-    <input class="slider" id="topSlider" list="tickmarks" max="100" min="0" step="1" type="range" value=""
-        style="background: linear-gradient(to right, rgb(255, 127, 127) 0%, rgb(255, 127, 127) 48.55%, red 48.55%, red 53.45%, grey 53.45%, grey 100%);">
-    <center><input class="slider" id="topSlider" list="tickmarks" max="100" min="0" step="1" type="range" value="" />
+    <div style="text-align: left; margin-bottom: 10px; font-weight: bold; font-size: 22px;">
+        Option 1
+    </div>
+    <span data-text="${e://Field/1_generalTradePairSpan_A}" class="tooltip">
+        <b>${e://Field/1_generalTradePairName_A}</b>
+    </span> 
+    <br /> <br />Old Value: ${e://Field/1_generalTradePairValue_A} 
+    <br /> New value: ${e://Field/1_generalTradePairNewValue_A} 
+    <br /> Difference: $e{ e://Field/1_generalTradePairNewValue_A - e://Field/1_generalTradePairValue_A} 
+    <br /> <strong>${e://Field/1_generalTradePairArrows_A}</strong>
+    <br /> <center>
+        <input
+            style="--gradient-start: ${e://Field/1_generalTradePairValue_A}%; --gradient-end: ${e://Field/1_generalTradePairNewValue_A}%; --color-1: #FF7F7F; --color-2: red; float: none"
+            class="slider" list="tickmarks" max="100" min="0" step="1" type="range" value="" />
         <div class="sliderticks">
             <p>0</p>
             <p>10</p>
@@ -30,4 +41,3 @@
 </body>
 
 </html>
-

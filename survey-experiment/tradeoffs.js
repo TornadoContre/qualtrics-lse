@@ -9,7 +9,6 @@ Qualtrics.SurveyEngine.addOnload(function () {
     for (const choiceKey in choices) {
         let elementId = "#" + questionId + "-" + choiceKey + "-label";
         $(elementId + " span").css({ "width": "100%", "text-align": "center" });
-        // float: none para poner la barra en buena relacion con los ticks
 
         let tooltipObj = $(elementId + " span.tooltip")[0];
         if (tooltipObj && tooltipObj.getAttribute("data-text") === "") {
