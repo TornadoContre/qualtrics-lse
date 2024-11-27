@@ -48,12 +48,10 @@ Qualtrics.SurveyEngine.addOnload(function () {
 
     const namePrefix = "aspectName";
     const spanPrefix = "aspectSpan";
-    const markersPrefix = "aspectMarkers";
     aspectMap.map(function (element, idx) {
         let i = idx + 1;
         Qualtrics.SurveyEngine.setEmbeddedData(namePrefix + i, element["name"]);
         Qualtrics.SurveyEngine.setEmbeddedData(spanPrefix + i, element["span"]);
-        Qualtrics.SurveyEngine.setEmbeddedData(markersPrefix + i, JSON.stringify(element["markers"]));
         i++
     })
 });
