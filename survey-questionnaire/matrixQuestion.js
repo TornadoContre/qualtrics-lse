@@ -78,7 +78,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 Qualtrics.SurveyEngine.addOnReady(function () {
 	/*Place your JavaScript here to run when the page is fully displayed*/
 	// Setting variables
-	let disableMarkers = false; // Set to 'true' to disable markers
+	let disableMarkers = true; // Set to 'true' to disable markers
 	let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
 	let aspectMap = JSON.parse(aspectMapString);
 	let questionId = this.questionId;
