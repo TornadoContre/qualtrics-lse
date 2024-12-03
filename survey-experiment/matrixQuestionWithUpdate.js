@@ -57,6 +57,9 @@ Qualtrics.SurveyEngine.addOnload(function () {
 		slider.on('input change', function () {
 			aspectObj[responseKey] = $(this).val();
 			updateAspectMap(aspectMap);
+			if ($(this).val() > 0) {
+				$("input[id='hidden-input']").prop("checked", true);
+			}
 		});
 
 		// 2.2 Capture the input value
@@ -72,7 +75,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 			updateAspectMap(aspectMap);
 		}
 	};
-	$(".QuestionBody BorderColor").css('overflow', 'visible');
+
 });
 
 Qualtrics.SurveyEngine.addOnReady(function () {
@@ -181,6 +184,7 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 	}
 
 	// Overflow
+	$("#Questions").css('overflow', 'visible')
 	$(".QuestionBody").css('overflow', 'visible');
 	$(".BorderColor").css('overflow', 'visible');
 });
