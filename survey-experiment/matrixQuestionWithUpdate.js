@@ -150,7 +150,7 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 						setTimeout(() => {
 							timerStarted[aspectIndex] = false;
 							tooltip.removeClass('show');
-						}, 2500);
+						}, 2100);
 					}
 				}
 			}
