@@ -132,8 +132,18 @@ function imprimirEmbeddedVariables(N) {
     })
 }
 
+function imprimirEmbeddedBVariables50(N) {
+    const sections = ["general", "policy"];
+    sections.forEach((section) => {
+        for (let i = 1; i <= N; i++) {
+            console.log(`\${e://Field/${i}_${section}50TradePairValue_B}`)
+        }
+    })
+}
+
 //imprimirHtmlTradeoffs(3, "general")
 //imprimirHtmlTradeoffs(3, "policy")
 //imprimirHtml50Tradeoffs(3, "general")
-//imprimirHtml50Tradeoffs(3, "policy")
-imprimirEmbeddedVariables(3)
+imprimirHtml50Tradeoffs(3, "policy")
+//imprimirEmbeddedBVariables50(3)
+//imprimirHtmlAspectos(14)
