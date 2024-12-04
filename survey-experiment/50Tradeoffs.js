@@ -83,7 +83,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 		// Captures if slider moved
 		var slider = $('input[id="' + questionId + '~' + choiceKey + '~result"]');
 		slider.on('input change', function () {
-			if ($(this).val() > 0) {
+			if ($(this).val() > bValue) {
 				$("input[id='hidden-input']").prop("checked", true);
 			}
 		});
