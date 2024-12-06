@@ -287,11 +287,11 @@ Qualtrics.SurveyEngine.addOnUnload(function () {
 			let uniquePairs = createUniquePairs(localAspectMap, numberOfPairs);
 			uniquePairs.forEach((pair, i) => {
 				i = i + 1;
-				let aValue = parseInt(aspectMap[pair[0]][responseKey]);
-				let bValue = parseInt(aspectMap[pair[1]][responseKey]);
+				let aValue = parseInt(localAspectMap[pair[0]][responseKey]);
+				let bValue = parseInt(localAspectMap[pair[1]][responseKey]);
 				let sign = getRandomSign(aValue, bValue);
 				pair.map((element, j) => {
-					const oldValue = parseInt(aspectMap[element][responseKey]);
+					const oldValue = parseInt(localAspectMap[element][responseKey]);
 					if (tradeOffType === "Trade") {
 						const magnitude = getRandomMagnitude();
 						var newValue = applyRandomMagnitude(oldValue, magnitude, sign);
@@ -304,10 +304,10 @@ Qualtrics.SurveyEngine.addOnUnload(function () {
 							var newValue = Math.round(parseInt(oldValue) * (1 - percentageTradeOff));
 						}
 					}
-					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairNameSuffix + pairCase[j], aspectMap[element][nameKey])
-					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairSpanSuffix + pairCase[j], aspectMap[element].span);
+					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairNameSuffix + pairCase[j], localAspectMap[element][nameKey])
+					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairSpanSuffix + pairCase[j], localAspectMap[element].span);
 					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairValueSuffix + pairCase[j], oldValue);
-					if (newValue) {
+					if (newValue !== undefined || newValue === 0) {
 						Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairNewValueSuffix + pairCase[j], newValue);
 					}
 				})

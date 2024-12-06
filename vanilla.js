@@ -147,3 +147,19 @@ function imprimirEmbeddedBVariables50(N) {
 imprimirHtml50Tradeoffs(3, "policy")
 //imprimirEmbeddedBVariables50(3)
 //imprimirHtmlAspectos(14)
+
+
+["general", "policy"].forEach((t) => {
+    [true, false].forEach((a) => {
+        [1, 2, 3].forEach((i) => {
+            const m = a ? "" : "50";
+            const k = t + m;
+            console.log("[" + t + "-" + m + "Trade] " + "Name_A: " + Qualtrics.SurveyEngine.getEmbeddedData(`${i}_${k}TradePairName_A`));
+            console.log("[" + t + "-" + m + "Trade] " + "Value_A: " + Qualtrics.SurveyEngine.getEmbeddedData(`${i}_${k}TradePairValue_A`));
+            console.log("[" + t + "-" + m + "Trade] " + "NewValue_A: " + Qualtrics.SurveyEngine.getEmbeddedData(`${i}_${k}TradePairNewValue_A`));
+            console.log("[" + t + "-" + m + "Trade] " + "Name_B: " + Qualtrics.SurveyEngine.getEmbeddedData(`${i}_${k}TradePairName_B`));
+            console.log("[" + t + "-" + m + "Trade] " + "Value_B: " + Qualtrics.SurveyEngine.getEmbeddedData(`${i}_${k}TradePairValue_B`));
+            console.log("[" + t + "-" + m + "Trade] " + "NewValue_B: " + Qualtrics.SurveyEngine.getEmbeddedData(`${i}_${k}TradePairNewValue_B`));
+        })
+    })
+})
