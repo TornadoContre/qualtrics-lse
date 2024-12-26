@@ -111,7 +111,7 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 			if (isValid) {
 				that.clickNextButton();
 			} else {
-				const msg = "If points were assigned to 'Other', then text must be specified. If text was specified, then points must be assigned."
+				const msg = Qualtrics.SurveyEngine.getEmbeddedData('otherError');
 				$('div[id="QR~' + that.questionId + '~VALIDATION"]').html(msg).css("display", "block");
 				$('html, body').animate({
 					scrollTop: $('div[id="QR~' + that.questionId + '~VALIDATION"]').offset().top
