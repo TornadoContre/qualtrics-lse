@@ -1,17 +1,17 @@
 /*NOTAS: Para hacer hacer salto de línea usar estos caracteres especiales: &#013;&#010; */
-.tooltip {
+.tooltip-custom {
     position: relative;
+    display: inline-block;
     z-index: 1001;
-    border-bottom: 1px dashed #000;
 }
 
-.tooltip:before {
+.tooltip-custom:before {
     content: attr(data-text);
     position: absolute;
-    top: 180%;
+    top: 120%;
     transform: translateX(-50%);
     left: 50%;
-    width: 450px;
+    width: 150px;
     padding: 5px;
     border-radius: 5px;
     background: #000;
@@ -22,20 +22,21 @@
     white-space: pre-line;
 }
 
-.tooltip::after {
+.tooltip-custom::after {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: -20px;
+    bottom: -20%;
     transform: translateX(-50%);
     border: 10px solid transparent;
     border-bottom-color: #000;
     display: none;
 }
 
-.tooltip:hover:before,
-.tooltip:hover:after {
+.tooltip-custom:hover:before,
+.tooltip-custom:hover:after {
     display: block;
+    z-index: 1002;
 }
 
 .matrix-tooltip {
@@ -218,10 +219,9 @@
 @media (max-width: 480px) {
 
     /* Value can be adjusted. 1024 to ensure only monitors and laptops. */
-    .tooltip:before {
-        font-size: 12px;
-        top: 190%;
-        width: 260px;
+    .tooltip-custom:before {
+        left: 97%;
+        width: 140px;
     }
 
     .mensaje {
