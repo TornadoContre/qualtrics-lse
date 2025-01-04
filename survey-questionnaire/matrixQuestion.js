@@ -7,12 +7,21 @@ Qualtrics.SurveyEngine.addOnload(function () {
 	// Setting variables
 	let personalQuestion = true; // true if is a 'personal' question. false for political/societary question
 	let nameKey = personalQuestion ? 'personalName' : 'socialName';
+	let descriptionKey = personalQuestion ? 'personalDescription' : "socialDescription";
 	let responseKey = personalQuestion ? 'personalResponseValue' : 'socialResponseValue';
 	let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
 	let aspectMap = JSON.parse(aspectMapString);
 	let questionId = this.questionId;
 	let $ = jQuery;
 	let choices = this.getQuestionInfo().Choices;
+
+	// Update span
+    const spanPrefix = "aspectSpan";
+    aspectMap.map(function (element, idx) {
+        let i = idx + 1;
+        Qualtrics.SurveyEngine.setEmbeddedData(spanPrefix + i, element[descriptionKey]);
+        i++;
+    })
 
 	let regex = />([^<]+)</;
 	for (const choiceKey in choices) {
