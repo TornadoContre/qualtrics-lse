@@ -13,7 +13,8 @@ Qualtrics.SurveyEngine.addOnload(function()
 		handleTrack.css("margin-top", "3px");
 		track.css({
 			"height": "10px",
-			"background": "linear-gradient(to right, gray 0% min(var(--gradient-start), var(--gradient-end)), var(--color-1) min(var(--gradient-start), var(--gradient-end)) max(var(--gradient-start), var(--gradient-end)), var(--color-2) max(var(--gradient-start), var(--gradient-end)) 100%)"
+			"background": "linear-gradient(to right, gray 0% min(var(--gradient-start), var(--gradient-end)), var(--color-1) min(var(--gradient-start), var(--gradient-end)) max(var(--gradient-start), var(--gradient-end)), var(--color-2) max(var(--gradient-start), var(--gradient-end)) 100%)",
+			"opacity": 1,
 		});
 		track[0].style.setProperty("--gradient-start", "0%");
 		track[0].style.setProperty("--gradient-end", "0%");

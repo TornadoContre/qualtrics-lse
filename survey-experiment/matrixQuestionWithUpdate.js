@@ -27,9 +27,24 @@ Qualtrics.SurveyEngine.addOnload(function () {
 		}
 
 		// Set track style
-		let track = $('#' + questionId + ' .' + questionId + '-' + choiceKey + '-track');
-		track.css('z-index', 1002);
-		track.css('opacity', 1);
+		let handleTrack = $("#" + questionId + " ." + questionId + "-" + choiceKey + "-handle");
+		let track = $("#" + questionId + " ." + questionId + "-" + choiceKey + "-track");
+
+		handleTrack.attr('style', function(i, estilo) {
+			return (estilo || '') + 'border-color: #F44336 !important;';
+		});
+
+		handleTrack.css("margin-top", "3px");
+		track.css({
+			"height": "10px",
+			"background": "linear-gradient(to right, gray 0% min(var(--gradient-start), var(--gradient-end)), var(--color-1) min(var(--gradient-start), var(--gradient-end)) max(var(--gradient-start), var(--gradient-end)), var(--color-2) max(var(--gradient-start), var(--gradient-end)) 100%)",
+			"z-index": 1002,
+			"opacity": 1,
+		});
+		track[0].style.setProperty("--gradient-start", "0%");
+		track[0].style.setProperty("--gradient-end", "0%");
+		track[0].style.setProperty("--color-1", "#F44336");
+		track[0].style.setProperty("--color-2", "#0000002e");
 
 		// Find aspect object
 		let elementChoiceId = nameKey + "-choiceId"; // Useful for the 'other' aspect
@@ -46,9 +61,8 @@ Qualtrics.SurveyEngine.addOnload(function () {
 			// Tooltip in handler
 			let msg = markers[keyStartsWith0];
 			let tooltipId = questionId + '-' + choiceKey + '-tooltip';
-			let handle = $('#' + questionId + ' .' + questionId + '-' + choiceKey + '-handle');
-			handle.addClass("hover-trigger");
-			handle.append('<div id=' + tooltipId + ' class="mensaje">' + msg + '</div>');
+			handleTrack.addClass("hover-trigger");
+			handleTrack.append('<div id=' + tooltipId + ' class="mensaje">' + msg + '</div>');
 
 		}
 
@@ -97,6 +111,7 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 			if (mutation.type === "attributes" && mutation.attributeName === "aria-valuenow") {
 				let target = mutation.target;
 				const value = parseInt(target.getAttribute("aria-valuenow"));
+				target.style.setProperty("--gradient-end", value + "%");
 
 				const aspectId = target.id.replace('track', 'text');
 				let aspectName = $("[id='" + aspectId + "']")[0].textContent.strip();
