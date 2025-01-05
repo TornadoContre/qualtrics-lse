@@ -117,7 +117,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
             "personalDescription": "This includes the presence, diversity and quality of green spaces, such as mountains, canyons, forests, meadows and grasslands, and larger parks, but also wildlife and animals as well as rivers, lakes, coastal areas, and the quality of the air in your area. Absence, pollution and destruction mean lower quality of the natural environment.",
             "socialMarkers": { "0-25": "There is no natural environment or it is of very poor quality/very polluted or destroyed.", "25-50": "There is some natural environment, but not a lot and/or of rather poor quality/somewhat polluted or destroyed.", "50-75": "There is good quality natural environment, even if somewhat polluted/destructed.", "75-100": "There is a lot of good quality natural environment, with very little or no pollution or destruction." },
             "socialDescription": "This includes the presence, diversity and quality of green spaces, such as mountains, canyons, forests, meadows and grasslands, and larger parks, but also wildlife and animals as well as rivers, lakes, coastal areas, and the quality of the air in your area. Absence, pollution and destruction mean lower quality of the natural environment.",
-            "socialMarkers": { "0-25": "There is no natural environment or it is of very poor quality/very polluted or destroyed.", "25-50": "There is some natural environment, but not a lot and/or of rather poor quality/somewhat polluted or destroyed.", "50-75": "There is good quality natural environment, even if somewhat polluted/destructed.", "75-100": "There is a lot of good quality natural environment, with very little or no pollution or destruction." }
+            "socialMarkers": { "0-25": "Social Marker 0.25", "25-50": "Social marker 25-50", "50-75": "social marker 50-75", "75-100": "socual marker 75-100" }
         },
     ]
 
@@ -127,17 +127,20 @@ Qualtrics.SurveyEngine.addOnload(function () {
     ]
     aspectMap = reorderSubsets(aspectMap);
     aspectMap = [...aspectMap, ...otherArray];
-    console.log(aspectMap)
 
     var aspectMapString = JSON.stringify(aspectMap);
     Qualtrics.SurveyEngine.setEmbeddedData('aspectMapString', aspectMapString);
 
     const namePrefix = "aspectName";
+    const spanPrefixPersonal = "aspectSpanPersonal";
+    const spanPrefixSocial = "aspectSpanSocial";
     aspectMap.map(function (element, idx) {
         let i = idx + 1;
         Qualtrics.SurveyEngine.setEmbeddedData(namePrefix + i, element["name"]);
+        Qualtrics.SurveyEngine.setEmbeddedData(spanPrefixPersonal + i, element["personalDescription"]);
+        Qualtrics.SurveyEngine.setEmbeddedData(spanPrefixSocial + i, element["socialDescription"]);
         i++;
-    })
+    });
 });
 
 Qualtrics.SurveyEngine.addOnReady(function () {
