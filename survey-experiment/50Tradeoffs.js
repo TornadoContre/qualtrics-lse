@@ -3,7 +3,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 	// Setting variables
 	let $ = jQuery;
 	const pairNumber = 1;
-	const type_ = "policy"; // Values: `general` or `policy`
+	const type_ = "general"; // Values: `general` or `policy`
 	const questionId = this.questionId;
 	const firstChoiceKey = 1;
 	const secondChoiceKey = 2;
@@ -98,7 +98,7 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 	// Setting variables
 	let $ = jQuery;
 	const pairNumber = 1;
-	const type_ = "policy"; // Values: `general` or `policy`
+	const type_ = "general"; // Values: `general` or `policy`
 	const questionId = this.questionId;
 	const that = this;
 	const secondChoiceKey = 2;

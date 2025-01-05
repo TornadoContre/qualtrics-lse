@@ -8,6 +8,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 	let personalQuestion = false; // true if is a 'personal' question. false for political/societary question
 	let nameKey = personalQuestion ? 'personalName' : 'socialName';
 	let responseKey = personalQuestion ? 'personalResponseValue' : 'socialResponseValue';
+	let markersKey = personalQuestion ? "personalMarkers": "socialMarkers";
 	let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
 	let aspectMap = JSON.parse(aspectMapString);
 	let questionId = this.questionId;
@@ -38,7 +39,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 		updateAspectMap(aspectMap);
 
 		// 1. Set markers
-		const markers = aspectObj.markers;
+		const markers = aspectObj[markersKey];
 		if (markers) {
 			const keyStartsWith0 = Object.keys(markers).find(key => key.startsWith("0"));
 
@@ -82,6 +83,8 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 	/*Place your JavaScript here to run when the page is fully displayed*/
 	// Setting variables
 	let disableMarkers = false; // Set to 'true' to disable markers
+	let personalQuestion = false; // true if is a 'personal' question. false for political/societary question
+	let markersKey = personalQuestion ? "personalMarkers": "socialMarkers";
 	let aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
 	let aspectMap = JSON.parse(aspectMapString);
 	let questionId = this.questionId;
@@ -101,7 +104,7 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 				let aspectObj = aspectMap.find(element => element.name === aspectName);
 				const aspectIndex = aspectMap.indexOf(aspectObj);
 				if (aspectIndex === -1) { continue; }
-				const markers = aspectObj["markers"];
+				const markers = aspectObj[markersKey];
 				var msg = "";
 				for (const markerRange in markers) {
 					let lowerBound = markerRange.split('-').map(Number)[0]
@@ -278,6 +281,7 @@ Qualtrics.SurveyEngine.addOnUnload(function () {
 		let sectionKey = personalQuestion ? '_general' : '_policy'
 		let nameKey = personalQuestion ? 'personalName' : 'socialName';
 		let responseKey = personalQuestion ? 'personalResponseValue' : 'socialResponseValue';
+		let spanKey = personalQuestion ? "personalDescription": "socialDescription";
 
 		// Remove empty aspects
 		let localAspectMap = aspectMap.filter((aspect) => aspect[nameKey] ? aspect[nameKey] !== '' : false);
@@ -305,11 +309,14 @@ Qualtrics.SurveyEngine.addOnUnload(function () {
 						}
 					}
 					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairNameSuffix + pairCase[j], localAspectMap[element][nameKey])
-					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairSpanSuffix + pairCase[j], localAspectMap[element].span);
+					if (localAspectMap[element][spanKey] && localAspectMap[element][spanKey] !== "") {
+						Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairSpanSuffix + pairCase[j], localAspectMap[element][spanKey]);
+					}
 					Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairValueSuffix + pairCase[j], oldValue);
 					if (newValue !== undefined || newValue === 0) {
 						Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairNewValueSuffix + pairCase[j], newValue);
 					}
+					
 				})
 			})
 		})

@@ -74,10 +74,6 @@ function testAspect() {
             console.log(aspectMap[element].name, "| Indice:", idx)
         })
     })
-    /*let firstPar = uniquePairs[0];
-    firstPar.map((element) => {
-        console.log(aspectMap[element].name)
-    })*/
     
     for (let i = -11; i <= 111; i++) {
         for (let j = 0; j <= 4; j++) {
@@ -86,10 +82,11 @@ function testAspect() {
     }
 }
 
-function imprimirHtmlAspectos(N) {
+function imprimirHtmlAspectos(N, personal) {
+    const spanSuffix = personal ? "Personal" : "Social";
     console.log("##### Tabla de aspectos ##### ")
     for (let i = 1; i <= N; i++) {
-        console.log(`<p style="color:#2980b9;"><span data-text="\${e://Field/aspectSpan${i}}" class="matrix-tooltip">\${e://Field/aspectName${i}} <sup>&#9432;</sup></span></p>`);
+        console.log(`<p style="color:#2980b9;"><span data-text="\${e://Field/aspectSpan${spanSuffix}${i}}" class="matrix-tooltip">\${e://Field/aspectName${i}} <sup>&#9432;</sup></span></p>`);
     }
 }
 
@@ -144,22 +141,7 @@ function imprimirEmbeddedBVariables50(N) {
 //imprimirHtmlTradeoffs(3, "general")
 //imprimirHtmlTradeoffs(3, "policy")
 //imprimirHtml50Tradeoffs(3, "general")
-imprimirHtml50Tradeoffs(3, "policy")
+//imprimirHtml50Tradeoffs(3, "policy")
 //imprimirEmbeddedBVariables50(3)
-//imprimirHtmlAspectos(14)
-
-
-["general", "policy"].forEach((t) => {
-    [true, false].forEach((a) => {
-        [1, 2, 3].forEach((i) => {
-            const m = a ? "" : "50";
-            const k = t + m;
-            console.log("[" + t + "-" + m + "Trade] " + "Name_A: " + Qualtrics.SurveyEngine.getEmbeddedData(`${i}_${k}TradePairName_A`));
-            console.log("[" + t + "-" + m + "Trade] " + "Value_A: " + Qualtrics.SurveyEngine.getEmbeddedData(`${i}_${k}TradePairValue_A`));
-            console.log("[" + t + "-" + m + "Trade] " + "NewValue_A: " + Qualtrics.SurveyEngine.getEmbeddedData(`${i}_${k}TradePairNewValue_A`));
-            console.log("[" + t + "-" + m + "Trade] " + "Name_B: " + Qualtrics.SurveyEngine.getEmbeddedData(`${i}_${k}TradePairName_B`));
-            console.log("[" + t + "-" + m + "Trade] " + "Value_B: " + Qualtrics.SurveyEngine.getEmbeddedData(`${i}_${k}TradePairValue_B`));
-            console.log("[" + t + "-" + m + "Trade] " + "NewValue_B: " + Qualtrics.SurveyEngine.getEmbeddedData(`${i}_${k}TradePairNewValue_B`));
-        })
-    })
-})
+imprimirHtmlAspectos(14, true)
+//imprimirHtmlAspectos(14, false)
