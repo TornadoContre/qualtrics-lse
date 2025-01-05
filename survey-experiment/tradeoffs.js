@@ -9,12 +9,6 @@ Qualtrics.SurveyEngine.addOnload(function () {
     for (const choiceKey in choices) {
         let elementId = "#" + questionId + "-" + choiceKey + "-label";
         $(elementId + " span").css({ "width": "100%", "text-align": "center" });
-
-        let tooltipObj = $(elementId + " span.tooltip")[0];
-        if (tooltipObj && tooltipObj.getAttribute("data-text") === "") {
-            tooltipObj.removeAttribute("data-text");
-            tooltipObj.removeClassName("tooltip");
-        }
     }
 });
 
