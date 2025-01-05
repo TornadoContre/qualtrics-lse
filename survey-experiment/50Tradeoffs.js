@@ -3,7 +3,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 	// Setting variables
 	let $ = jQuery;
 	const pairNumber = 1;
-	const type_ = "general"; // Values: `general` or `policy`
+	const type_ = "policy"; // Values: `general` or `policy`
 	const questionId = this.questionId;
 	const firstChoiceKey = 1;
 	const secondChoiceKey = 2;
@@ -83,11 +83,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
 		// Captures if slider moved
 		var slider = $('input[id="' + questionId + '~' + choiceKey + '~result"]');
 		slider.on('input change', function () {
-			if ($(this).val() > bValue) {
-				$("input[id='hidden-input']").prop("checked", true);
-			} else {
-				$("input[id='hidden-input']").prop("checked", false);
-			}
+			$("input[id='hidden-input']").prop("checked", $(this).val() > bValue);
 		});
 	}
 
@@ -102,8 +98,9 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 	// Setting variables
 	let $ = jQuery;
 	const pairNumber = 1;
-	const type_ = "general"; // Values: `general` or `policy`
+	const type_ = "policy"; // Values: `general` or `policy`
 	const questionId = this.questionId;
+	const that = this;
 	const secondChoiceKey = 2;
 	
 	let bValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_" + type_ + "50TradePairValue_B"));
@@ -130,6 +127,30 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 		let observer = new MutationObserver(callback);
 		observer.observe(secondTrack[0], config);
 	}
+
+	const choices = that.getQuestionInfo().Choices;
+	let choiceKey;
+	for(const k in choices) {
+		if (!choices[k].Text.includes("Difference: ")) {
+			choiceKey = k;
+			break;
+		}
+	}
+
+	// Set the custom error message
+	let nextButton = $("#NextButton");
+	nextButton.click(function () {
+		setTimeout(function () {
+			// Captures slider's value
+			var sliderValue = $('input[id="' + questionId + '~' + choiceKey + '~result"]').val();
+			console.log(sliderValue, bValue);
+			if (sliderValue < bValue) {
+				$("#ErrorMessage > span").html("You have moved the slider to the left. The question asks you to move the slider to the right. Would you like to change your answer?");
+				$("#Page > div > div.PageErrorDialog > div.ErrorButtons > button:nth-child(1)").html("No, next question");
+				$("#Page > div > div.PageErrorDialog > div.ErrorButtons > button:nth-child(2)").html("Yes, take me back"); 
+			}
+		}, 5);
+	})
 
 	// Overflow
 	$("#Questions").css('overflow', 'visible');
