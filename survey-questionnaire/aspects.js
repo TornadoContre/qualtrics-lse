@@ -17,19 +17,18 @@ Qualtrics.SurveyEngine.addOnload(function () {
         return [...subsetFalse, ...shuffledSubsetTrue];
     }
 
+    /* Aspects definition */
     // When the subset is setted to "true", it belongs to the subset that will be reordered (randomly) and put at the end.
     var aspectMap = [
         {
-            "subset": false,
-            "name": "Health",
+            "subset": false, "name": "Health",
             "personalDescription": "One’s physical and mental health. This includes not only the absence of acute or chronic disease, but also bodily integrity and good mental and physical health and fitness.",
             "personalMarkers": { "0-25": "Very poor health, for example because of severe acute, recurring, or chronic physical or mental health issues that can’t be cured or treated.", "25-50": "Mediocre health, for example because of acute, recurring, or chronic physical or mental health issues that can’t be fully cured or treated.", "50-75": " Good health, with minor acute, recurring, or chronic physical or mental health issues that can usually be easily cured or treated.", "75-100": "Excellent health, with none or only very minor acute, recurring, or chronic physical or mental health issues that can usually be easily cured or treated." },
             "socialDescription": "One’s physical and mental health. This includes not only the absence of acute or chronic disease, but also bodily integrity and good mental and physical health and fitness.",
             "socialMarkers": { "0-25": "Very poor health, for example because of severe acute, recurring, or chronic physical or mental health issues that can’t be cured or treated.", "25-50": "Mediocre health, for example because of acute, recurring, or chronic physical or mental health issues that can’t be fully cured or treated.", "50-75": " Good health, with minor acute, recurring, or chronic physical or mental health issues that can usually be easily cured or treated.", "75-100": "Excellent health, with none or only very minor acute, recurring, or chronic physical or mental health issues that can usually be easily cured or treated." }
         },
         {
-            "subset": false,
-            "name": "Material Living Standard",
+            "subset": false, "name": "Material Living Standard",
             "personalDescription": "This includes the built environment, such as the quality of housing, including appliances and decor. It also includes belongings or assets. And it includes infrastructure and public services like electricity, water, heating or cooling systems, communication and transport infrastructure, public spaces and buildings, roads, bridges, and tunnels.",
             "personalMarkers": { "0-25": "Very poor quality housing and physical infrastructure, for example no or bare shelter and no or very bad access to public services such as drinking water, electricity, and transport or telecommunications infrastructure.", "25-50": "Mediocre quality housing and physical infrastructure, for example housing that is overcrowded or requiring many repairs  and minimal access or very low quality of public services such as drinking water, electricity, and transport or telecommunications infrastructure.", "50-75": "Good quality housing and physical infrastructure, for example functional housing with some defects and good access and quality of public services such as drinking water, electricity, and transport or telecommunications infrastructure ", "75-100": "Excellent quality housing and physical infrastructure, for example fully functional housing with no or only minor defects and very good access and quality to public services such as drinking water, electricity, and transport or telecommunications infrastructure " },
             "socialDescription": "This includes the built environment, such as the quality of housing, including appliances and decor. It also includes belongings or assets. And it includes infrastructure and public services like electricity, water, heating or cooling systems, communication and transport infrastructure, public spaces and buildings, roads, bridges, and tunnels.",
@@ -117,7 +116,7 @@ Qualtrics.SurveyEngine.addOnload(function () {
             "personalDescription": "This includes the presence, diversity and quality of green spaces, such as mountains, canyons, forests, meadows and grasslands, and larger parks, but also wildlife and animals as well as rivers, lakes, coastal areas, and the quality of the air in your area. Absence, pollution and destruction mean lower quality of the natural environment.",
             "personalMarkers": { "0-25": "There is no natural environment or it is of very poor quality/very polluted or destroyed.", "25-50": "There is some natural environment, but not a lot and/or of rather poor quality/somewhat polluted or destroyed.", "50-75": "There is good quality natural environment, even if somewhat polluted/destructed.", "75-100": "There is a lot of good quality natural environment, with very little or no pollution or destruction." },
             "socialDescription": "This includes the presence, diversity and quality of green spaces, such as mountains, canyons, forests, meadows and grasslands, and larger parks, but also wildlife and animals as well as rivers, lakes, coastal areas, and the quality of the air in your area. Absence, pollution and destruction mean lower quality of the natural environment.",
-            "socialMarkers": { "0-25": "Social Marker 0.25", "25-50": "Social marker 25-50", "50-75": "social marker 50-75", "75-100": "socual marker 75-100" }
+            "socialMarkers": { "0-25": "There is no natural environment or it is of very poor quality/very polluted or destroyed.", "25-50": "There is some natural environment, but not a lot and/or of rather poor quality/somewhat polluted or destroyed.", "50-75": "There is good quality natural environment, even if somewhat polluted/destructed.", "75-100": "There is a lot of good quality natural environment, with very little or no pollution or destruction." }
         },
     ]
 
