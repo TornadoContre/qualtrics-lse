@@ -142,7 +142,6 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 		setTimeout(function () {
 			// Captures slider's value
 			var sliderValue = $('input[id="' + questionId + '~' + choiceKey + '~result"]').val();
-			console.log(sliderValue, bValue);
 			if (sliderValue < bValue) {
 				$("#ErrorMessage > span").html("You have moved the slider to the left. The question asks you to move the slider to the right. Would you like to change your answer?");
 				$("#Page > div > div.PageErrorDialog > div.ErrorButtons > button:nth-child(1)").html("No, next question");
