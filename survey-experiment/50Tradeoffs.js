@@ -8,9 +8,8 @@ Qualtrics.SurveyEngine.addOnload(function () {
 	const firstChoiceKey = 1;
 	const secondChoiceKey = 2;
 	
-	const percentageTradeOff = parseFloat(Qualtrics.SurveyEngine.getEmbeddedData("percentageTradeOff"));
 	let aValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_" + type_ + "50TradePairValue_A"));
-	let modifiedValue = Math.round(parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_" + type_ + "50TradePairValue_A")) * (1 - percentageTradeOff));
+	let modifiedValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_" + type_ + "50TradePairNewValue_A"));
 	let bValue = parseInt(Qualtrics.SurveyEngine.getEmbeddedData(pairNumber + "_" + type_ + "50TradePairValue_B"));
 
 	// Custom start

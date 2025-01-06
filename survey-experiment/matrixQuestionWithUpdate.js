@@ -287,7 +287,10 @@ Qualtrics.SurveyEngine.addOnUnload(function () {
 	const personalQuestionOptions = [true, false]; // true if is a 'personal' question. false for political/societary question
 	const tradeOffTypes = ["Trade", "50Trade"];
 
-	const percentageTradeOff = parseFloat(Qualtrics.SurveyEngine.getEmbeddedData("percentageTradeOff"));
+	const percentageTradeOffRange = Qualtrics.SurveyEngine.getEmbeddedData("percentageTradeOffRange");
+	let [percentageLowerBound, percentageUpperBound] = percentageTradeOffRange.split('-');
+	percentageLowerBound = parseFloat(percentageLowerBound);
+	percentageUpperBound = parseFloat(percentageUpperBound);
 	const numberOfPairs = parseInt("${e://Field/numberOfPairs}"); // Must be the max value between the number of pairs in each section
 	const aspectMapString = Qualtrics.SurveyEngine.getEmbeddedData('aspectMapString');
 	const aspectMap = JSON.parse(aspectMapString);
@@ -320,6 +323,7 @@ Qualtrics.SurveyEngine.addOnUnload(function () {
 						Qualtrics.SurveyEngine.setEmbeddedData(i + sectionKey + tradeOffType + pairArrowsSuffix + pairCase[j], arrows);
 					} else {
 						if (pairCase[j] === "A") {
+							let percentageTradeOff = Math.random() * (percentageUpperBound - percentageLowerBound) + percentageLowerBound;
 							var newValue = Math.round(parseInt(oldValue) * (1 - percentageTradeOff));
 						}
 					}
